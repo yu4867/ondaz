@@ -1,4 +1,5 @@
 import "./styles.css";
+import { setupMobileNav } from "./nav.js";
 
 const categories = [
   {
@@ -43,6 +44,9 @@ const renderItems = (items) =>
 document.querySelector("#app").innerHTML = `
   <header class="site-header">
     <a class="brand" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
+    <button class="hamburger" aria-label="메뉴 열기" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <nav class="nav" aria-label="주요 메뉴">
       <a href="/guide.html">이용 안내</a>
       <a href="/menu.html">메뉴</a>
@@ -146,3 +150,5 @@ document.querySelector("#app").innerHTML = `
     <span class="kakao-fab__label">카카오톡 문의</span>
   </a>
 `;
+
+setupMobileNav();
