@@ -90,15 +90,28 @@ document.querySelector("#app").innerHTML = `
 
           <div class="quote-notice quote-form__wide">
             <h3>안내사항</h3>
-            <p>문의하기 버튼을 누르시면 작성하신 내용이 정리됩니다.</p>
-            <p>정리된 내용을 복사하신 후, 카카오채널톡으로 보내주시면 빠르게 확인 후 답변드리겠습니다.</p>
+            <p>문의하기 버튼을 누르시면 작성하신 내용이 팝업으로 정리됩니다.</p>
+            <p>카카오톡 문의하기 버튼을 누르면 내용이 자동 복사되고 채팅창으로 이동합니다.</p>
           </div>
           <button type="submit">문의하기</button>
-          <output class="quote-result quote-form__wide" id="quoteResult" aria-live="polite"></output>
         </form>
       </div>
     </section>
   </main>
+
+  <div class="quote-modal-overlay" id="quoteModal" role="dialog" aria-modal="true">
+    <div class="quote-modal">
+      <div class="quote-modal__header">
+        <h3 class="quote-modal__title">견적 문의 내용 확인</h3>
+        <button class="quote-modal__close" id="quoteModalClose" aria-label="닫기">✕</button>
+      </div>
+      <pre class="quote-modal__content" id="quoteModalContent"></pre>
+      <div class="quote-modal__guide">
+        <p>아래 버튼을 누르면 내용이 자동으로 복사됩니다.<br>카카오톡 채팅창에서 <strong>붙여넣기(Ctrl+V)</strong> 해주세요!</p>
+      </div>
+      <button class="quote-modal__cta" id="quoteModalCta">카카오톡 문의하기</button>
+    </div>
+  </div>
 
   <footer class="footer">
     <strong>ONDAZ</strong>
@@ -117,7 +130,17 @@ document.querySelector("#app").innerHTML = `
 setupMobileNav();
 
 const quoteForm = document.querySelector("#quoteForm");
-const quoteResult = document.querySelector("#quoteResult");
+const quoteModal = document.querySelector("#quoteModal");
+const quoteModalContent = document.querySelector("#quoteModalContent");
+const quoteModalClose = document.querySelector("#quoteModalClose");
+const quoteModalCta = document.querySelector("#quoteModalCta");
+
+let quoteText = "";
+
+function closeModal() {
+  quoteModal.classList.remove("is-open");
+  document.body.style.overflow = "";
+}
 
 quoteForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -139,5 +162,22 @@ quoteForm.addEventListener("submit", (event) => {
     `디자이너 연결 희망: ${form.get("designer") || ""}`,
   ];
 
-  quoteResult.textContent = lines.join("\\n");
+  quoteText = lines.join("\n");
+  quoteModalContent.textContent = quoteText;
+  quoteModal.classList.add("is-open");
+  document.body.style.overflow = "hidden";
+});
+
+quoteModalClose.addEventListener("click", closeModal);
+quoteModal.addEventListener("click", (e) => {
+  if (e.target === quoteModal) closeModal();
+});
+
+quoteModalCta.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(quoteText);
+  } catch {
+    // clipboard API 미지원 환경
+  }
+  window.open("https://open.kakao.com/o/srnbrlui", "_blank", "noopener,noreferrer");
 });
