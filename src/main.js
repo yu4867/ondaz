@@ -1,4 +1,5 @@
 import "./styles.css";
+import mainImage from "../main1.png";
 
 document.querySelector("#app").innerHTML = `
   <header class="site-header">
@@ -12,12 +13,10 @@ document.querySelector("#app").innerHTML = `
 
   <main id="top">
     <section class="hero">
-      <div class="hero__media image-placeholder">
-        <span>커피차 메인 이미지</span>
-      </div>
+      <div class="hero__media image-placeholder image-placeholder--photo" style="background-image: url('${mainImage}')"></div>
       <div class="hero__content">
         <p class="eyebrow">Coffee Truck Catering Service</p>
-        <h1>행사장에 도착하는<br />따뜻한 커피 한 잔, ONDAZ</h1>
+        <h1>행사장에 도착하는<br />시원한 커피 한 잔, <span class="hero__brand">ONDAZ</span></h1>
         <p>
           기업 행사, 촬영 현장, 학교 축제, 브랜드 프로모션까지 필요한 곳으로 직접 찾아가는
           맞춤형 커피차 서비스를 준비합니다.

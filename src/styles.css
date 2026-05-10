@@ -115,6 +115,10 @@ h1 {
   letter-spacing: 0;
 }
 
+.hero__brand {
+  color: #fd5225;
+}
+
 h2 {
   margin-bottom: 18px;
   font-size: clamp(30px, 4.2vw, 54px);
@@ -414,6 +418,11 @@ p {
     linear-gradient(135deg, rgba(34, 23, 20, 0.28), rgba(34, 23, 20, 0.05)),
     repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.12) 0 1px, transparent 1px 18px),
     linear-gradient(135deg, var(--coffee), var(--caramel) 52%, var(--blue));
+}
+
+.image-placeholder--photo {
+  background-position: center;
+  background-size: cover;
 }
 
 .image-placeholder::after {
