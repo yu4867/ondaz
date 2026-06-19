@@ -1,10 +1,10 @@
 import "./styles.css";
-import mainImage from "../main1.png";
+import mainImage from "../main2.png";
 import { setupMobileNav } from "./nav.js";
 
 document.querySelector("#app").innerHTML = `
   <header class="site-header">
-    <a class="brand" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
+    <a class="brand brand--crimson" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
     <button class="hamburger" aria-label="메뉴 열기" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>

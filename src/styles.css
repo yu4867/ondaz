@@ -1,11 +1,19 @@
+@font-face {
+  font-family: "Crimson ONDAZ";
+  src: url("./assets/fonts/CrimsonProRegular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --ink: #221714;
   --muted: #6f625c;
   --line: #e8ded8;
   --paper: #f7f2db;
   --cream: #f7f2db;
-  --coffee: #fd5225;
-  --caramel: #fd5225;
+  --coffee: #4b2e24;
+  --caramel: #4b2e24;
   --sage: #73815f;
   --blue: #516b7d;
   --white: #ffffff;
@@ -50,14 +58,20 @@ a {
   min-height: 74px;
   padding: 0 clamp(20px, 5vw, 72px);
   border-bottom: 1px solid rgba(232, 222, 216, 0.82);
-  background: rgba(255, 250, 246, 0.9);
+  background: var(--white);
   backdrop-filter: blur(18px);
 }
 
 .brand {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 900;
   color: var(--coffee);
+}
+
+.brand--crimson {
+  font-family: "Crimson ONDAZ", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0;
 }
 
 .nav {
@@ -91,7 +105,7 @@ a {
 }
 
 .nav-btn--ghost:hover {
-  background: rgba(253, 82, 37, 0.07);
+  background: rgba(75, 46, 36, 0.08);
 }
 
 .nav-btn--primary {
@@ -100,7 +114,7 @@ a {
 }
 
 .nav-btn--primary:hover {
-  background: #e0461f;
+  background: #3a2119;
 }
 
 .hero {
@@ -120,6 +134,7 @@ a {
   flex-direction: column;
   justify-content: center;
   padding: clamp(46px, 8vw, 110px);
+  background: var(--white);
 }
 
 .eyebrow {
@@ -147,7 +162,10 @@ h1 {
 }
 
 .hero__brand {
-  color: #fd5225;
+  font-family: "Crimson ONDAZ", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--coffee);
 }
 
 .hero__content h1 {
@@ -362,7 +380,7 @@ p {
 }
 
 .quote-page-section .quote-notice {
-  background: rgba(253, 82, 37, 0.06);
+  background: rgba(75, 46, 36, 0.06);
 }
 
 .quote-page-section .quote-notice h3 {
@@ -474,7 +492,7 @@ p {
 }
 
 .menu-column--signature {
-  background: rgba(253, 82, 37, 0.06);
+  background: rgba(75, 46, 36, 0.06);
 }
 
 .menu-column ul {
@@ -501,7 +519,7 @@ p {
 }
 
 .menu-column--signature li {
-  border-color: rgba(253, 82, 37, 0.24);
+  border-color: rgba(75, 46, 36, 0.24);
 }
 
 .menu-empty {
@@ -623,7 +641,7 @@ p {
   width: 48px;
   height: 48px;
   border-radius: 8px;
-  background: rgba(253, 82, 37, 0.12);
+  background: rgba(75, 46, 36, 0.12);
 }
 
 .accordion-icon::before,
@@ -660,7 +678,7 @@ p {
   height: 11px;
   border-radius: 50%;
   background: var(--coffee);
-  box-shadow: -10px 4px 0 rgba(253, 82, 37, 0.72), 10px 4px 0 rgba(253, 82, 37, 0.72);
+  box-shadow: -10px 4px 0 rgba(75, 46, 36, 0.72), 10px 4px 0 rgba(75, 46, 36, 0.72);
   transform: translateY(-8px);
 }
 
@@ -1565,7 +1583,7 @@ p {
   }
 
   .brand {
-    font-size: 24px;
+    font-size: 27px;
   }
 
   .hamburger {
@@ -2082,7 +2100,7 @@ p {
   gap: 24px;
   padding: 24px;
   border-radius: 8px;
-  background: rgba(253, 82, 37, 0.06);
+  background: rgba(75, 46, 36, 0.06);
   flex-wrap: wrap;
 }
 
@@ -2228,7 +2246,7 @@ p {
 
 .sq-drink-card:has(input:checked) {
   border-color: var(--coffee);
-  background: rgba(253, 82, 37, 0.05);
+  background: rgba(75, 46, 36, 0.05);
 }
 
 .sq-drink-card__name {
@@ -2270,7 +2288,7 @@ p {
 
 .sq-dessert-row:has(input:checked) {
   border-color: var(--coffee);
-  background: rgba(253, 82, 37, 0.05);
+  background: rgba(75, 46, 36, 0.05);
 }
 
 .sq-dessert-row input[type="radio"] {
@@ -2421,7 +2439,7 @@ p {
 
 .sq-pill:has(input:checked) {
   border-color: var(--coffee);
-  background: rgba(253, 82, 37, 0.08);
+  background: rgba(75, 46, 36, 0.08);
   color: var(--coffee);
 }
 
@@ -2519,7 +2537,7 @@ p {
   margin-bottom: 16px;
   padding: 12px 16px;
   border-radius: 8px;
-  background: rgba(253, 82, 37, 0.1);
+  background: rgba(75, 46, 36, 0.1);
   color: var(--coffee);
   font-size: 13px;
   font-weight: 700;
