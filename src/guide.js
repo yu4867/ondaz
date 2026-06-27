@@ -3,7 +3,7 @@ import { setupMobileNav } from "./nav.js";
 
 document.querySelector("#app").innerHTML = `
   <header class="site-header">
-    <a class="brand" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
+    <a class="brand brand--crimson" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
     <button class="hamburger" aria-label="메뉴 열기" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -11,6 +11,7 @@ document.querySelector("#app").innerHTML = `
       <a href="/guide.html">이용 안내</a>
       <a href="/menu.html">메뉴</a>
       <a href="/banner.html">배너 안내</a>
+      <a href="/event.html">이벤트</a>
       <div class="nav-btn-group">
         <a href="/self-quote.html" class="nav-btn nav-btn--ghost">셀프 견적</a>
         <a href="/quote.html" class="nav-btn nav-btn--primary">견적문의</a>
@@ -39,8 +40,8 @@ document.querySelector("#app").innerHTML = `
           <div class="accordion-content">
             <p>촬영장, 공연장, 행사장 등 장소 담당자에게 미리 문의해 주세요.</p>
             <ul>
-              <li>차량높이 5M 이상 확보</li>
-              <li>주차라인 3칸 이상 확보</li>
+              <li>차량높이 3M 이상 확보</li>
+              <li>주차라인 3칸 확보</li>
               <li>커피차 사이즈 확인 후 현장 진입 및 고정 주차 가능 여부 확인</li>
             </ul>
           </div>
@@ -60,7 +61,9 @@ document.querySelector("#app").innerHTML = `
             <ul>
               <li>전기지원 가능이란? 콘센트 연결이 가능한 상태를 의미</li>
               <li>전기 사용량 : 약 3KW</li>
-              <li>전기 미지원 시 : 발전기 대여료 70,000원 추가</li>
+              <li>전기 미지원 시 : 발전기 대여료 50,000원 (2시간 기준)</li>
+              <li>시간에 따라 추가 비용이 발생할 수 있습니다.</li>
+
             </ul>
           </div>
         </details>
@@ -128,7 +131,7 @@ document.querySelector("#app").innerHTML = `
           <div class="accordion-content">
             <ul>
               <li>기본 운영시간 : 2시간</li>
-              <li>추가 이용 : 시간당 50,000원 별도 발생</li>
+              <li>추가 이용 : 시간당 20,000원 별도 발생</li>
               <li>준비 시간 : 원활한 운영을 위해 행사 약 1시간 전 도착 (교통상황에 따라 달라질 수 있습니다.)</li>
             </ul>
           </div>
@@ -208,11 +211,11 @@ document.querySelector("#app").innerHTML = `
               <strong>음료 비용 + (디저트 비용) + 출장비 + 출력비 = 총 금액 (VAT 별도)</strong>
             </div>
             <ul>
-              <li>최소 주문 금액 : 600,000원 이상 *최소주문금액 = [음료만 or 음료 + 디저트] 가격</li>
+              <li>최소 주문 금액 : 500,000원 이상 *최소주문금액 = [음료 + 디저트] 가격</li>
               <li>디저트 선택 시 : 디저트 비용 별도 추가</li>
               <li>기본 출장비 : 70,000원 (거리/지역에 따라 추가 발생)</li>
               <li>출력비 : 음료비용 + (디저트비용)에 따라 서비스 제공 *디자인안내 참고</li>
-              <li>전기 사용 불가 시 : 발전기 대여료 70,000원 추가 발생</li>
+              <li>전기 사용 불가 시 : 발전기 대여료 50,000원 추가 발생 (2시간 기준)</li>
             </ul>
             <h3>EXAMPLE</h3>
             <ol>
@@ -228,7 +231,7 @@ document.querySelector("#app").innerHTML = `
   <footer class="footer">
     <strong>ONDAZ</strong>
     <p>커피차 서비스 · 기업 행사 · 촬영 현장 · 브랜드 프로모션</p>
-    <p>문의: ondaz@example.com · 상담시간: 평일 09:00 - 18:00</p>
+    <p>문의: yu4867@naver.com · 연락처: 0504-0802-2129</p>
   </footer>
 
   <a href="tel:05040802129" class="phone-fab" aria-label="전화로 문의하기">
@@ -238,7 +241,7 @@ document.querySelector("#app").innerHTML = `
     <span class="phone-fab__label">전화 문의</span>
   </a>
 
-  <a href="https://pf.kakao.com/_ondaz/chat" class="kakao-fab" target="_blank" rel="noopener noreferrer" aria-label="카카오톡으로 문의하기">
+  <a href="https://open.kakao.com/o/srnbrlui" class="kakao-fab" target="_blank" rel="noopener noreferrer" aria-label="카카오톡으로 문의하기">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
       <path fill="#3C1E1E" d="M12 3C6.93 3 2.5 6.58 2.5 11c0 2.8 1.68 5.27 4.24 6.78L5.5 22l4.74-2.48c.56.08 1.14.12 1.76.12 5.07 0 9.5-3.58 9.5-8S17.07 3 12 3z"/>
     </svg>

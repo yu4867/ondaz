@@ -31,8 +31,8 @@ function fmt(n) {
 }
 
 document.querySelector("#app").innerHTML = `
-  <header class="site-header">
-    <a class="brand" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
+  <div class="top-marquee" aria-label="ONDAZ 안내"><div class="top-marquee__track"><span>감도 높은 커피차 ONDAZ</span><span>7월 여름 한정 30만 원 이벤트 🖤</span><span>감도 높은 커피차 ONDAZ</span><span>7월 여름 한정 30만 원 이벤트 🖤</span><span>감도 높은 커피차 ONDAZ</span><span>7월 여름 한정 30만 원 이벤트 🖤</span><span>감도 높은 커피차 ONDAZ</span><span>7월 여름 한정 30만 원 이벤트 🖤</span></div></div>  <header class="site-header">
+    <a class="brand brand--crimson" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
     <button class="hamburger" aria-label="메뉴 열기" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -40,6 +40,7 @@ document.querySelector("#app").innerHTML = `
       <a href="/guide.html">이용 안내</a>
       <a href="/menu.html">메뉴</a>
       <a href="/banner.html">배너 안내</a>
+      <a href="/event.html">이벤트</a>
       <div class="nav-btn-group">
         <a href="/self-quote.html" class="nav-btn nav-btn--ghost">셀프 견적</a>
         <a href="/quote.html" class="nav-btn nav-btn--primary">견적문의</a>
@@ -156,7 +157,7 @@ document.querySelector("#app").innerHTML = `
   <footer class="footer">
     <strong>ONDAZ</strong>
     <p>커피차 서비스 · 기업 행사 · 촬영 현장 · 브랜드 프로모션</p>
-    <p>문의: ondaz@example.com · 상담시간: 평일 09:00 - 18:00</p>
+    <p>문의: yu4867@naver.com · 연락처: 0504-0802-2129</p>
   </footer>
 
   <a href="tel:05040802129" class="phone-fab" aria-label="전화로 문의하기">

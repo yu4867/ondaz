@@ -1,8 +1,29 @@
 import "./styles.css";
 import mainImage from "../main2.png";
 import { setupMobileNav } from "./nav.js";
+import whyImage1 from "../image/1.png";
+import whyImage2 from "../image/2.png";
+import whyImage3 from "../image/3.png";
+import whyImage4 from "../image/4.jpg";
+import whyImage5 from "../image/5.png";
+import whyImage6 from "../image/6.png";
+
+const whyImages = [whyImage1, whyImage2, whyImage3, whyImage4, whyImage5, whyImage6];
 
 document.querySelector("#app").innerHTML = `
+  <div class="top-marquee" aria-label="ONDAZ 안내">
+    <div class="top-marquee__track">
+      <span>감도 높은 커피차 ONDAZ</span>
+      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
+      <span>감도 높은 커피차 ONDAZ</span>
+      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
+      <span>감도 높은 커피차 ONDAZ</span>
+      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
+      <span>감도 높은 커피차 ONDAZ</span>
+      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
+    </div>
+  </div>
+
   <header class="site-header">
     <a class="brand brand--crimson" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
     <button class="hamburger" aria-label="메뉴 열기" aria-expanded="false">
@@ -12,6 +33,7 @@ document.querySelector("#app").innerHTML = `
       <a href="/guide.html">이용 안내</a>
       <a href="/menu.html">메뉴</a>
       <a href="/banner.html">배너 안내</a>
+      <a href="/event.html">이벤트</a>
       <div class="nav-btn-group">
         <a href="/self-quote.html" class="nav-btn nav-btn--ghost">셀프 견적</a>
         <a href="/quote.html" class="nav-btn nav-btn--primary">견적문의</a>
@@ -36,49 +58,20 @@ document.querySelector("#app").innerHTML = `
       </div>
     </section>
 
-    <section class="intro section">
-      <div class="section-heading">
+    <section class="intro section why-image-section" aria-label="Why ONDAZ 이미지 슬라이드">
+      <div class="section-heading why-slider-heading">
         <p class="eyebrow">Why ONDAZ</p>
-        <h2>처음 상담부터 행사 종료까지 한 번에</h2>
-        <p>
-          ONDAZ는 행사 목적과 현장 상황에 맞춰 메뉴 구성, 운영 인원, 차량 동선,
-          제공 수량을 함께 설계합니다.
-        </p>
+        <h2>다양한 행사와 함께하는 온다즈</h2>
+        <p>행사 목적과 현장 상황에 맞춰 메뉴 구성, 차량 동선, 제공 수량을 함께 고민합니다.</p>
       </div>
-      <div class="feature-grid">
-        <article class="feature-card">
-          <div class="feature-card__image image-placeholder"><span>서비스 이미지</span></div>
-          <h3>현장 맞춤 운영</h3>
-          <p>행사 규모, 시간대, 제공 방식에 따라 가장 효율적인 운영안을 제안합니다.</p>
-        </article>
-        <article class="feature-card">
-          <div class="feature-card__image image-placeholder"><span>메뉴 이미지</span></div>
-          <h3>다양한 음료 구성</h3>
-          <p>커피, 논커피, 티, 시즌 음료까지 목적에 맞는 메뉴 라인업을 준비합니다.</p>
-        </article>
-        <article class="feature-card">
-          <div class="feature-card__image image-placeholder"><span>행사 이미지</span></div>
-          <h3>브랜드 경험 강화</h3>
-          <p>컵 홀더, 배너, 차량 래핑 등 임시 브랜딩 요소를 활용할 수 있습니다.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="clients section">
-      <div class="section-heading">
-        <p class="eyebrow">Event Moments</p>
-        <h2>다양한 현장에 어울리는 ONDAZ</h2>
-        <p>
-          기업 복지 이벤트, 팝업 스토어, 영화 촬영장, 캠퍼스 행사 등 커피가 필요한 순간을 함께합니다.
-        </p>
-      </div>
-      <div class="gallery" aria-label="행사 이미지 갤러리">
-        <div class="image-placeholder"><span>현장 이미지</span></div>
-        <div class="image-placeholder"><span>브랜딩 이미지</span></div>
-        <div class="image-placeholder"><span>음료 이미지</span></div>
-        <div class="image-placeholder"><span>고객 이미지</span></div>
-        <div class="image-placeholder"><span>차량 이미지</span></div>
-        <div class="image-placeholder"><span>행사 이미지</span></div>
+      <div class="why-slider">
+        <div class="why-slider__track">
+          ${[...whyImages, ...whyImages].map((image, index) => `
+            <figure class="why-slide">
+              <img src="${image}" alt="ONDAZ 현장 이미지 ${(index % whyImages.length) + 1}" loading="lazy" />
+            </figure>
+          `).join("")}
+        </div>
       </div>
     </section>
   </main>
@@ -86,7 +79,7 @@ document.querySelector("#app").innerHTML = `
   <footer class="footer">
     <strong>ONDAZ</strong>
     <p>커피차 서비스 · 기업 행사 · 촬영 현장 · 브랜드 프로모션</p>
-    <p>문의: ondaz@example.com · 상담시간: 평일 09:00 - 18:00</p>
+    <p>문의: yu4867@naver.com · 연락처: 0504-0802-2129</p>
   </footer>
 
   <a href="tel:05040802129" class="phone-fab" aria-label="전화로 문의하기">
