@@ -2,10 +2,23 @@ import "./styles.css";
 import { setupMobileNav } from "./nav.js";
 import basicMenuImage from "../image/menu/basic메뉴.png";
 import standardMenuImage from "../image/menu/standard 메뉴.png";
+import allMenuImage from "../image/menu/전메뉴.png";
 import snackMenuImage from "../image/menu/스낵.png";
 import bakeryMenuImage from "../image/menu/베이커리.png";
 
-const renderMenuImage = ({ title, subtitle, image, alt, pending = false }) => `
+const renderMenuPrice = (price) => {
+  if (!price) return "";
+  if (typeof price === "string") {
+    return `<p class="menu-image-price menu-image-price--single">${price}</p>`;
+  }
+  return `
+    <dl class="menu-image-price-list">
+      ${price.map(({ name, value }) => `<div><dt>${name}</dt><dd>${value}</dd></div>`).join("")}
+    </dl>
+  `;
+};
+
+const renderMenuImage = ({ title, subtitle, image, alt, price, pending = false }) => `
   <article class="menu-image-card${pending ? " menu-image-card--pending" : ""}">
     <div class="menu-image-card__heading">
       <span>${subtitle}</span>
@@ -14,19 +27,20 @@ const renderMenuImage = ({ title, subtitle, image, alt, pending = false }) => `
     <div class="menu-image-frame">
       ${image ? `<img src="${image}" alt="${alt}" loading="lazy" />` : `<div class="menu-image-placeholder">이미지 준비 중</div>`}
     </div>
+    ${renderMenuPrice(price)}
   </article>
 `;
 
 document.querySelector("#app").innerHTML = `
   <div class="top-marquee" aria-label="ONDAZ 안내">
     <div class="top-marquee__track">
-      <span>감도 높은 커피차 ONDAZ</span>
+      <span>오늘의 공간을 카페로, ONDAZ</span>
       <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>감도 높은 커피차 ONDAZ</span>
+      <span>오늘의 공간을 카페로, ONDAZ</span>
       <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>감도 높은 커피차 ONDAZ</span>
+      <span>오늘의 공간을 카페로, ONDAZ</span>
       <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>감도 높은 커피차 ONDAZ</span>
+      <span>오늘의 공간을 카페로, ONDAZ</span>
       <span>7월 여름 한정 30만 원 이벤트 🖤</span>
     </div>
   </div>
@@ -62,23 +76,25 @@ document.querySelector("#app").innerHTML = `
       </div>
       <div class="menu-image-grid menu-image-grid--drink">
         ${renderMenuImage({
-          title: "베이직 메뉴",
+          title: "베이직 세트",
           subtitle: "Basic",
           image: basicMenuImage,
           alt: "ONDAZ 베이직 음료 메뉴",
+          price: "잔당 3,000원",
         })}
         ${renderMenuImage({
-          title: "스탠다드 메뉴",
+          title: "스탠다드 세트",
           subtitle: "Standard",
           image: standardMenuImage,
           alt: "ONDAZ 스탠다드 음료 메뉴",
+          price: "잔당 3,500원",
         })}
         ${renderMenuImage({
           title: "전메뉴",
           subtitle: "All Menu",
-          image: null,
+          image: allMenuImage,
           alt: "ONDAZ 전메뉴",
-          pending: true,
+          price: "잔당 4,000원",
         })}
       </div>
     </section>
@@ -94,12 +110,25 @@ document.querySelector("#app").innerHTML = `
           subtitle: "Snack",
           image: snackMenuImage,
           alt: "ONDAZ 스낵 메뉴",
+          price: [
+            { name: "꽈배기", value: "2,500원" },
+            { name: "핫도그", value: "3,000원" },
+            { name: "시나몬 츄러스", value: "3,500원" },
+            { name: "초코/카라멜 츄러스", value: "4,000원" },
+          ],
         })}
         ${renderMenuImage({
           title: "베이커리",
           subtitle: "Bakery",
           image: bakeryMenuImage,
           alt: "ONDAZ 베이커리 메뉴",
+          price: [
+            { name: "에그타르트", value: "4,000원" },
+            { name: "소금빵", value: "3,500원" },
+            { name: "르뱅쿠키", value: "3,800원" },
+            { name: "크로와상", value: "3,800원" },
+            { name: "샌드위치", value: "5,000원" },
+          ],
         })}
       </div>
     </section>
@@ -108,7 +137,7 @@ document.querySelector("#app").innerHTML = `
   <footer class="footer">
     <strong>ONDAZ</strong>
     <p>커피차 서비스 · 기업 행사 · 촬영 현장 · 브랜드 프로모션</p>
-    <p>문의: yu4867@naver.com · 연락처: 0504-0802-2129</p>
+    <p>문의: yu4867@naver.com · 연락처: 0508-9306-5718</p>
   </footer>
 
   <a href="tel:05040802129" class="phone-fab" aria-label="전화로 문의하기">

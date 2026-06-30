@@ -687,6 +687,58 @@ p {
   height: auto;
 }
 
+.menu-image-price,
+.menu-image-price-list {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+}
+
+.menu-image-price {
+  padding: 18px 20px;
+  color: var(--coffee);
+  font-size: 20px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.menu-image-price-list {
+  display: grid;
+  overflow: hidden;
+}
+
+.menu-image-price-list div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 18px;
+  border-top: 1px solid var(--line);
+}
+
+.menu-image-price-list div:first-child {
+  border-top: 0;
+}
+
+.menu-image-price-list dt,
+.menu-image-price-list dd {
+  margin: 0;
+}
+
+.menu-image-price-list dt {
+  min-width: 0;
+  color: var(--ink);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.menu-image-price-list dd {
+  color: var(--coffee);
+  font-weight: 900;
+  white-space: nowrap;
+}
+
 .menu-image-placeholder {
   display: grid;
   min-height: 440px;

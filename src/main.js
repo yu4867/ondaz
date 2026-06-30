@@ -13,13 +13,13 @@ const whyImages = [whyImage1, whyImage2, whyImage3, whyImage4, whyImage5, whyIma
 document.querySelector("#app").innerHTML = `
   <div class="top-marquee" aria-label="ONDAZ 안내">
     <div class="top-marquee__track">
-      <span>감도 높은 커피차 ONDAZ</span>
+      <span>오늘의 공간을 카페로, ONDAZ</span>
       <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>감도 높은 커피차 ONDAZ</span>
+      <span>오늘의 공간을 카페로, ONDAZ</span>
       <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>감도 높은 커피차 ONDAZ</span>
+      <span>오늘의 공간을 카페로, ONDAZ</span>
       <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>감도 높은 커피차 ONDAZ</span>
+      <span>오늘의 공간을 카페로, ONDAZ</span>
       <span>7월 여름 한정 30만 원 이벤트 🖤</span>
     </div>
   </div>
@@ -79,7 +79,7 @@ document.querySelector("#app").innerHTML = `
   <footer class="footer">
     <strong>ONDAZ</strong>
     <p>커피차 서비스 · 기업 행사 · 촬영 현장 · 브랜드 프로모션</p>
-    <p>문의: yu4867@naver.com · 연락처: 0504-0802-2129</p>
+    <p>문의: yu4867@naver.com · 연락처: 0508-9306-5718</p>
   </footer>
 
   <a href="tel:05040802129" class="phone-fab" aria-label="전화로 문의하기">

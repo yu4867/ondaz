@@ -231,7 +231,7 @@ document.querySelector("#app").innerHTML = `
   <footer class="footer">
     <strong>ONDAZ</strong>
     <p>커피차 서비스 · 기업 행사 · 촬영 현장 · 브랜드 프로모션</p>
-    <p>문의: yu4867@naver.com · 연락처: 0504-0802-2129</p>
+    <p>문의: yu4867@naver.com · 연락처: 0508-9306-5718</p>
   </footer>
 
   <a href="tel:05040802129" class="phone-fab" aria-label="전화로 문의하기">
