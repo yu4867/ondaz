@@ -2953,8 +2953,8 @@ p {
   margin-bottom: 16px;
   padding: 12px 16px;
   border-radius: 8px;
-  background: rgba(75, 46, 36, 0.1);
-  color: var(--coffee);
+  background: rgba(220, 38, 38, 0.1);
+  color: #b91c1c;
   font-size: 13px;
   font-weight: 700;
   line-height: 1.55;
@@ -2968,7 +2968,7 @@ p {
 }
 
 .sq-cta {
-  display: block;
+  display: flex;
   width: 100%;
   text-align: center;
 }

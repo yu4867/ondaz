@@ -2,25 +2,42 @@ import "./styles.css";
 import { setupMobileNav } from "./nav.js";
 
 const DRINKS = [
-  { id: "premium",   label: "프리미엄 음료", price: 3500, unit: "잔" },
-  { id: "signature", label: "시그니처 음료", price: 4000, unit: "잔" },
+  { id: "basic", label: "베이직 세트", price: 3000, unit: "잔" },
+  { id: "standard", label: "스탠다드 세트", price: 3500, unit: "잔" },
+  { id: "all", label: "전메뉴", price: 4000, unit: "잔" },
 ];
 
 const DESSERTS = [
-  { id: "none",      label: "선택 안 함",        price: 0,    min: 0,   unit: "" },
-  { id: "croissant", label: "크로붕",             price: 3500, min: 70,  unit: "개" },
-  { id: "bakery",    label: "베이커리 단품세트",  price: 4000, min: 70,  unit: "인분" },
-  { id: "special",   label: "프리미엄 & 스페셜", price: 5000, min: 100, unit: "인분" },
+  { id: "none", label: "선택 안 함", price: 0, unit: "" },
+  { id: "twisted-donut", label: "꽈배기", price: 2500, unit: "개" },
+  { id: "hotdog", label: "핫도그", price: 3000, unit: "개" },
+  { id: "cinnamon-churros", label: "시나몬 츄러스", price: 3500, unit: "개" },
+  { id: "choco-caramel-churros", label: "초코/카라멜 츄러스", price: 4000, unit: "개" },
+  { id: "egg-tart", label: "에그타르트", price: 4000, unit: "개" },
+  { id: "salt-bread", label: "소금빵", price: 3500, unit: "개" },
+  { id: "levain-cookie", label: "르뱅쿠키", price: 3800, unit: "개" },
+  { id: "croissant", label: "크로와상", price: 3800, unit: "개" },
+  { id: "sandwich", label: "샌드위치", price: 5000, unit: "개" },
 ];
 
-const FEE = { trip: 70000, extraHour: 50000, generator: 70000, designer: 30000 };
-const MIN_ORDER = 600000;
+const REGIONS = [
+  { id: "seoul-south-gyeonggi", label: "서울, 경기남부권", fee: 100000, display: "100,000원" },
+  { id: "north-outer-gyeonggi", label: "경기북부, 외곽", fee: 120000, display: "120,000~150,000원" },
+  { id: "cheonan-asan", label: "천안, 아산", fee: 120000, display: "120,000원" },
+  { id: "chungcheong", label: "충청권", fee: 150000, display: "150,000원" },
+  { id: "jeolla-gangwon-gyeongsang", label: "전라, 강원, 경상", fee: 150000, display: "150,000~300,000원" },
+  { id: "jeju-islands", label: "제주 및 섬지역권", fee: 1000000, display: "1,000,000원~" },
+];
+
+const FEE = { extraHour: 50000, generator: 70000, designer: 30000 };
+const MIN_ORDER = 500000;
 
 const state = {
-  drinkId: "premium",
+  drinkId: "basic",
   drinkQty: 100,
   dessertId: "none",
   dessertQty: 70,
+  regionId: "seoul-south-gyeonggi",
   extraHours: 0,
   hasPower: true,
   wantsDesigner: false,
@@ -90,7 +107,7 @@ document.querySelector("#app").innerHTML = `
                 <label class="sq-dessert-row">
                   <input type="radio" name="dessertId" value="${d.id}" ${d.id === state.dessertId ? "checked" : ""} />
                   <span class="sq-dessert-row__name">${d.label}</span>
-                  ${d.price > 0 ? `<span class="sq-dessert-row__price">${fmt(d.price)} / ${d.unit} · 최소 ${d.min}${d.unit}</span>` : ""}
+                  ${d.price > 0 ? `<span class="sq-dessert-row__price">${fmt(d.price)} / ${d.unit}</span>` : ""}
                 </label>
               `).join("")}
             </div>
@@ -102,9 +119,21 @@ document.querySelector("#app").innerHTML = `
                   <input id="dessertQty" class="sq-qty-input" type="number" value="${state.dessertQty}" min="1" />
                   <button class="sq-qty-btn" data-target="dessertQty" data-dir="1">+</button>
                 </div>
-                <small id="dessertQtyHint" class="sq-hint"></small>
               </div>
             </label>
+          </div>
+
+          <div class="sq-card">
+            <p class="sq-card__title">지역 선택 *</p>
+            <div class="sq-dessert-group">
+              ${REGIONS.map(region => `
+                <label class="sq-dessert-row">
+                  <input type="radio" name="regionId" value="${region.id}" ${region.id === state.regionId ? "checked" : ""} />
+                  <span class="sq-dessert-row__name">${region.label}</span>
+                  <span class="sq-dessert-row__price">${region.display}</span>
+                </label>
+              `).join("")}
+            </div>
           </div>
 
           <div class="sq-card">
@@ -167,7 +196,7 @@ document.querySelector("#app").innerHTML = `
     <span class="phone-fab__label">전화 문의</span>
   </a>
 
-  <a href="https://open.kakao.com/o/srnbrlui" class="kakao-fab" target="_blank" rel="noopener noreferrer" aria-label="카카오톡으로 문의하기">
+  <a href="http://pf.kakao.com/_IcCPX/chat" class="kakao-fab" target="_blank" rel="noopener noreferrer" aria-label="카카오톡으로 문의하기">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
       <path fill="#3C1E1E" d="M12 3C6.93 3 2.5 6.58 2.5 11c0 2.8 1.68 5.27 4.24 6.78L5.5 22l4.74-2.48c.56.08 1.14.12 1.76.12 5.07 0 9.5-3.58 9.5-8S17.07 3 12 3z"/>
     </svg>
@@ -182,24 +211,25 @@ setupMobileNav();
 function renderResult() {
   const drink = DRINKS.find(d => d.id === state.drinkId);
   const dessert = DESSERTS.find(d => d.id === state.dessertId);
+  const region = REGIONS.find(r => r.id === state.regionId);
 
   const drinkCost = drink.price * state.drinkQty;
   const dessertCost = dessert.id !== "none" ? dessert.price * state.dessertQty : 0;
   const menuAmt = drinkCost + dessertCost;
-  const belowMin = menuAmt < MIN_ORDER;
 
   const extraHourCost = state.extraHours * FEE.extraHour;
   const generatorCost = state.hasPower ? 0 : FEE.generator;
   const designerCost = state.wantsDesigner ? FEE.designer : 0;
 
-  const subtotal = menuAmt + FEE.trip + extraHourCost + generatorCost + designerCost;
+  const subtotal = menuAmt + region.fee + extraHourCost + generatorCost + designerCost;
   const vat = Math.round(subtotal * 0.1);
   const total = subtotal + vat;
+  const belowMin = menuAmt < MIN_ORDER;
 
   const rows = [
     { label: drink.label, detail: `${state.drinkQty}${drink.unit} × ${fmt(drink.price)}`, value: drinkCost },
     dessert.id !== "none" && { label: dessert.label, detail: `${state.dessertQty}${dessert.unit} × ${fmt(dessert.price)}`, value: dessertCost },
-    { label: "기본 출장비", detail: "지역에 따라 추가 발생", value: FEE.trip },
+    { label: "출장비", detail: `${region.label} · ${region.display}`, value: region.fee },
     state.extraHours > 0 && { label: `추가 운영 ${state.extraHours}시간`, detail: `${fmt(FEE.extraHour)} × ${state.extraHours}`, value: extraHourCost },
     !state.hasPower && { label: "발전기 대여료", detail: "", value: FEE.generator },
     state.wantsDesigner && { label: "디자이너 연결", detail: "", value: FEE.designer },
@@ -207,7 +237,6 @@ function renderResult() {
 
   document.getElementById("sqResult").innerHTML = `
     <p class="sq-result__title">예상 견적</p>
-    ${belowMin ? `<div class="sq-warning">최소 주문 금액(${fmt(MIN_ORDER)})에 미달합니다. 수량을 늘려주세요.</div>` : ""}
     <div class="sq-breakdown">
       ${rows.map(r => `
         <div class="sq-row">
@@ -221,29 +250,14 @@ function renderResult() {
       <div class="sq-row sq-row--muted"><span>부가세 10%</span><span>${fmt(vat)}</span></div>
       <div class="sq-row sq-row--total"><span>예상 합계</span><span>${fmt(total)}</span></div>
     </div>
-    <p class="sq-disclaimer">참고 단가 기준의 예상 금액으로 실제 견적과 다를 수 있습니다.<br>출장비는 지역에 따라 추가될 수 있습니다.</p>
-    <a class="button button--primary sq-cta" href="/quote.html">정식 견적 문의하기</a>
+    <p class="sq-disclaimer">참고 단가 기준의 예상 금액으로 실제 견적과 다를 수 있습니다.</p>
+    ${belowMin ? `<div class="sq-warning">음료와 디저트 합산액이 ${fmt(MIN_ORDER)} 미만입니다.</div>` : ""}
+    <a class="button button--primary sq-cta" href="/quote.html">견적 문의하기</a>
   `;
 }
 
 // ── 힌트 업데이트 ───────────────────────────────────────────
 
-
-function updateDessertHint() {
-  const dessert = DESSERTS.find(d => d.id === state.dessertId);
-  if (dessert.id === "none") return;
-  const hint = document.getElementById("dessertQtyHint");
-  const input = document.getElementById("dessertQty");
-  if (state.dessertQty < dessert.min) {
-    hint.textContent = `최소 ${dessert.min}${dessert.unit} 이상 필요합니다`;
-    hint.style.color = "var(--coffee)";
-    input.style.borderColor = "var(--coffee)";
-  } else {
-    hint.textContent = `최소 ${dessert.min}${dessert.unit}`;
-    hint.style.color = "";
-    input.style.borderColor = "";
-  }
-}
 
 function updateDessertQtyVisibility() {
   const wrap = document.getElementById("dessertQtyWrap");
@@ -273,13 +287,7 @@ document.getElementById("drinkQty").addEventListener("input", e => {
 document.querySelectorAll("input[name='dessertId']").forEach(el => {
   el.addEventListener("change", () => {
     state.dessertId = el.value;
-    const dessert = DESSERTS.find(d => d.id === state.dessertId);
-    if (dessert.id !== "none" && state.dessertQty < dessert.min) {
-      state.dessertQty = dessert.min;
-      document.getElementById("dessertQty").value = state.dessertQty;
-    }
     updateDessertQtyVisibility();
-    updateDessertHint();
     renderResult();
   });
 });
@@ -287,8 +295,14 @@ document.querySelectorAll("input[name='dessertId']").forEach(el => {
 document.getElementById("dessertQty").addEventListener("input", e => {
   state.dessertQty = Math.max(1, parseInt(e.target.value) || 1);
   e.target.value = state.dessertQty;
-  updateDessertHint();
   renderResult();
+});
+
+document.querySelectorAll("input[name='regionId']").forEach(el => {
+  el.addEventListener("change", () => {
+    state.regionId = el.value;
+    renderResult();
+  });
 });
 
 document.querySelectorAll("input[name='hasPower']").forEach(el => {
@@ -315,7 +329,6 @@ document.querySelectorAll(".sq-qty-btn").forEach(btn => {
     } else if (target === "dessertQty") {
       state.dessertQty = Math.max(1, state.dessertQty + dir * 10);
       document.getElementById("dessertQty").value = state.dessertQty;
-      updateDessertHint();
     } else if (target === "extraHours") {
       state.extraHours = Math.max(0, Math.min(4, state.extraHours + dir));
       updateExtraHoursDisplay();
