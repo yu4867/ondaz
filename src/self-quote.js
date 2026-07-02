@@ -105,7 +105,7 @@ document.querySelector("#app").innerHTML = `
 
           <div class="sq-card">
             <p class="sq-card__title">디저트 선택</p>
-            <p class="sq-card__note">디저트는 개수로 50개 이상 주문 필요합니다.</p>
+            <p class="sq-card__note">디저트는 한 종류당 50개 이상 주문 필요합니다.</p>
             <div class="sq-dessert-group">
               ${DESSERTS.map(d => `
                 <label class="sq-dessert-row">
@@ -230,7 +230,7 @@ function renderResult() {
   const total = subtotal + vat;
   const warnings = [
     drinkCost < MIN_DRINK_ORDER && `음료 주문 금액이 ${fmt(MIN_DRINK_ORDER)} 미만입니다.`,
-    dessert.id !== "none" && state.dessertQty < MIN_DESSERT_QTY && `디저트는 ${MIN_DESSERT_QTY}개 이상 주문해야 합니다.`,
+    dessert.id !== "none" && state.dessertQty < MIN_DESSERT_QTY && `디저트는 한 종류당 ${MIN_DESSERT_QTY}개 이상 주문해야 합니다.`,
   ].filter(Boolean);
 
   const rows = [

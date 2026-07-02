@@ -87,7 +87,7 @@ document.querySelector("#app").innerHTML = `
           <summary>
             <span class="accordion-icon icon-payment" aria-hidden="true"></span>
             <span class="accordion-title">
-              <strong>예약금 및 취소 위약금 안내</strong>
+              <strong>예약금 및 환불안내</strong>
               <small>예약금 기준 및 취소 정책</small>
             </span>
             <span class="accordion-toggle">⌄</span>
@@ -98,7 +98,7 @@ document.querySelector("#app").innerHTML = `
               <li>음료만 주문 : 200,000원</li>
               <li>음료 + 디저트 주문 : 200,000원 + 디저트 금액</li>
             </ul>
-            <h3>취소 위약금 안내 (행사일 기준)</h3>
+            <h3>예약금 환불 안내</h3>
             <ul>
               <li>5일 전 취소 : 예약금 100% 환불</li>
               <li>3일 전 취소 : 예약금 50% 환불</li>
