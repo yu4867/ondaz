@@ -2564,6 +2564,16 @@ p {
   background: var(--paper);
 }
 
+.bn-sample--banner .bn-sample__img {
+  aspect-ratio: auto;
+  height: auto;
+  object-fit: initial;
+  padding: 0;
+  border: 1px solid #111111;
+  border-radius: 0;
+  background: transparent;
+}
+
 .bn-sample__label {
   margin: 0;
   text-align: center;

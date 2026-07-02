@@ -4,8 +4,20 @@ import { setupMobileNav } from "./nav.js";
 import circleSticker1 from "../image/출력물 안내/원형스티커 (1).png";
 import circleSticker2 from "../image/출력물 안내/원형스티커 (2).png";
 import circleSticker3 from "../image/출력물 안내/원형스티커 (3).png";
+import horizontalBanner1 from "../image/출력물 안내/가로현수막 (1).png";
+import horizontalBanner2 from "../image/출력물 안내/가로현수막 (2).png";
+import horizontalBanner3 from "../image/출력물 안내/가로현수막 (3).png";
+import horizontalBanner4 from "../image/출력물 안내/가로현수막 (4).png";
+import horizontalBanner5 from "../image/출력물 안내/가로현수막 (5).png";
+import banner1 from "../image/출력물 안내/현수막(1).png";
+import banner2 from "../image/출력물 안내/현수막(2).png";
+import banner3 from "../image/출력물 안내/현수막(3).png";
+import banner4 from "../image/출력물 안내/현수막(4).png";
+import banner5 from "../image/출력물 안내/현수막(5).png";
 
 const circleStickerSamples = [circleSticker1, circleSticker2, circleSticker3];
+const horizontalBannerSamples = [horizontalBanner1, horizontalBanner2, horizontalBanner3, horizontalBanner4, horizontalBanner5];
+const bannerSamples = [banner1, banner2, banner3, banner4, banner5];
 
 const NAV = `
   <div class="top-marquee" aria-label="ONDAZ 안내">
@@ -56,7 +68,7 @@ document.querySelector("#app").innerHTML = `
         <div class="bn-guide-card">
           <span class="bn-guide-card__label">권장 이미지 해상도</span>
           <strong>300dpi 이상</strong>
-          <span>선명한 출력물을 위해 고화질 원본 이미지로 작업해주세요.</span>
+          <span>선명한 출력물을 위해</br>고화질 원본 이미지로 작업해주세요.</span>
         </div>
         <div class="bn-guide-card bn-guide-card--file-type">
           <span class="bn-guide-card__label">전달 가능 파일 형식</span>
@@ -66,7 +78,7 @@ document.querySelector("#app").innerHTML = `
         <div class="bn-guide-card">
           <span class="bn-guide-card__label">스티커 파일 주의</span>
           <strong>칼선 없는 파일</strong>
-          <span>원형스티커는 재단선 없이 완성 이미지로 보내주세요.</span>
+          <span>원형스티커는 재단선 없이</br>완성 이미지로 보내주세요.</span>
         </div>
         <div class="bn-guide-card bn-guide-card--wide">
           <span class="bn-guide-card__label">홍보물 전달 기한</span>
@@ -78,22 +90,22 @@ document.querySelector("#app").innerHTML = `
         <div class="bn-guide-card bn-guide-card--fee bn-guide-card--mail">
           <span class="bn-guide-card__label">파일 보내주실 메일</span>
           <strong>yu4867@naver.com</strong>
-          <span>메일 제목: 날짜, 행사명 (작품명 or 서포트 받는 분)</span>
+          <span>메일 제목: 날짜, 행사명</br>(작품명 or 서포트 받는 분)</span>
         </div>
         <div class="bn-guide-card">
           <span class="bn-guide-card__label">영상 파일 기준</span>
           <strong>mp4 형식 / 해상도 720</strong>
-          <span>고해상도 영상은 현장 장비에서 재생이 어려울 수 있습니다.</span>
+          <span>고해상도 영상은</br>현장 장비에서 재생이 어려울 수 있습니다.</span>
         </div>
         <div class="bn-guide-card bn-guide-card--fee">
           <span class="bn-guide-card__label">긴급 출력 비용</span>
           <strong>장당 20,000원</strong>
-          <span>전달 기한을 넘기는 경우 비용이 발생할 수 있습니다.</span>
+          <span>전달 기한을 넘기는 경우</br>비용이 발생할 수 있습니다.</span>
         </div>
         <div class="bn-guide-card bn-guide-card--fee">
           <span class="bn-guide-card__label">디자이너 연결 비용</span>
           <strong>기본 30,000원</strong>
-          <span>디자인 작업이 어려우신 경우 추가 가능합니다.</span>
+          <span>디자인 작업이 어려우신 경우</br>추가 가능합니다.</span>
         </div>
       </div>
     </section>
@@ -154,8 +166,27 @@ document.querySelector("#app").innerHTML = `
         </section>
 
         <section class="bn-gallery-category">
-          <h3>상단현수막</h3>
-          <div class="bn-gallery-empty">샘플 준비 중</div>
+          <h3>가로현수막</h3>
+          <div class="bn-gallery-grid">
+            ${horizontalBannerSamples.map((image, index) => `
+              <figure class="bn-sample bn-sample--banner">
+                <img class="bn-sample__img" src="${image}" alt="가로현수막 예시 ${index + 1}" loading="lazy" />
+                <figcaption class="bn-sample__label">가로현수막 ${index + 1}</figcaption>
+              </figure>
+            `).join("")}
+          </div>
+        </section>
+
+        <section class="bn-gallery-category">
+          <h3>현수막</h3>
+          <div class="bn-gallery-grid">
+            ${bannerSamples.map((image, index) => `
+              <figure class="bn-sample bn-sample--banner">
+                <img class="bn-sample__img" src="${image}" alt="현수막 예시 ${index + 1}" loading="lazy" />
+                <figcaption class="bn-sample__label">현수막 ${index + 1}</figcaption>
+              </figure>
+            `).join("")}
+          </div>
         </section>
 
         <section class="bn-gallery-category">
