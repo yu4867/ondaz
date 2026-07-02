@@ -4,6 +4,8 @@ import { setupMobileNav } from "./nav.js";
 import circleSticker1 from "../image/출력물 안내/원형스티커 (1).png";
 import circleSticker2 from "../image/출력물 안내/원형스티커 (2).png";
 import circleSticker3 from "../image/출력물 안내/원형스티커 (3).png";
+import circleSticker4 from "../image/출력물 안내/원형스티커 (4).png";
+import circleSticker5 from "../image/출력물 안내/원형스티커 (5).png";
 import horizontalBanner1 from "../image/출력물 안내/가로현수막 (1).png";
 import horizontalBanner2 from "../image/출력물 안내/가로현수막 (2).png";
 import horizontalBanner3 from "../image/출력물 안내/가로현수막 (3).png";
@@ -15,7 +17,7 @@ import banner3 from "../image/출력물 안내/현수막(3).png";
 import banner4 from "../image/출력물 안내/현수막(4).png";
 import banner5 from "../image/출력물 안내/현수막(5).png";
 
-const circleStickerSamples = [circleSticker1, circleSticker2, circleSticker3];
+const circleStickerSamples = [circleSticker1, circleSticker2, circleSticker3, circleSticker4, circleSticker5];
 const horizontalBannerSamples = [horizontalBanner1, horizontalBanner2, horizontalBanner3, horizontalBanner4, horizontalBanner5];
 const bannerSamples = [banner1, banner2, banner3, banner4, banner5];
 
@@ -113,12 +115,12 @@ document.querySelector("#app").innerHTML = `
     <section class="section bn-print" id="print-service">
       <div class="section-heading">
         <p class="eyebrow">Print Service</p>
-        <h2>출력물 서비스 안내</h2>
-        <p>주문 금액 기준 서비스 품목입니다. 음료가격 또는 음료 + 디저트 금액 기준으로 적용됩니다.</p>
+        <h2>출력물 서비스</h2>
+        <p>주문 금액 기준 서비스 품목입니다.</br> <strong>음료가격</strong> 또는 <strong>음료 + 디저트 금액</strong> 기준으로 적용됩니다.</p>
       </div>
       <div class="print-tier-grid">
         <div class="print-tier">
-          <p class="print-tier__amount">50만 원 이상</p>
+          <p class="print-tier__amount">60만 원 이상</p>
           <ul class="print-tier__list">
             <li>오른쪽 현수막</li>
             <li>32인치 모니터</li>
@@ -130,6 +132,7 @@ document.querySelector("#app").innerHTML = `
             <li><strong>왼쪽 현수막</strong></li>
             <li>오른쪽 현수막</li>
             <li>32인치 모니터</li>
+            <li>원형스티커</li>
           </ul>
         </div>
         <div class="print-tier print-tier--accent">
@@ -138,7 +141,7 @@ document.querySelector("#app").innerHTML = `
             <li><strong>왼쪽 현수막</strong></li>
             <li>오른쪽 현수막</li>
             <li>32인치 모니터</li>
-            <li>X배너</li>
+            <li><strong>X배너</strong></li>
             <li><strong>원형 스티커</strong></li>
           </ul>
         </div>
