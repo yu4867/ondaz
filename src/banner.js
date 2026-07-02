@@ -16,10 +16,11 @@ import banner2 from "../image/출력물 안내/현수막(2).png";
 import banner3 from "../image/출력물 안내/현수막(3).png";
 import banner4 from "../image/출력물 안내/현수막(4).png";
 import banner5 from "../image/출력물 안내/현수막(5).png";
+import banner6 from "../image/출력물 안내/현수막(6).png";
 
 const circleStickerSamples = [circleSticker1, circleSticker2, circleSticker3, circleSticker4, circleSticker5];
 const horizontalBannerSamples = [horizontalBanner1, horizontalBanner2, horizontalBanner3, horizontalBanner4, horizontalBanner5];
-const bannerSamples = [banner1, banner2, banner3, banner4, banner5];
+const bannerSamples = [banner1, banner2, banner3, banner4, banner5, banner6];
 
 const NAV = `
   <div class="top-marquee" aria-label="ONDAZ 안내">
