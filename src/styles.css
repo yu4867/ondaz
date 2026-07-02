@@ -985,8 +985,23 @@ p {
   line-height: 1.9;
 }
 
+.accordion-content li + li {
+  margin-top: 10px;
+}
+
 .accordion-content .button {
   margin-top: 18px;
+}
+
+.guide-inline-link {
+  color: var(--crimson);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.guide-inline-link:hover {
+  color: var(--coffee);
 }
 
 .guide-summary {
@@ -1321,7 +1336,7 @@ p {
 
 .cost-box strong {
   color: var(--coffee);
-  font-size: clamp(22px, 3vw, 34px);
+  font-size: clamp(18px, 2.2vw, 26px);
   line-height: 1.35;
 }
 
@@ -2637,6 +2652,13 @@ p {
   font-weight: 900;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+.sq-card__note {
+  margin: -8px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 /* 음료 선택 카드 */

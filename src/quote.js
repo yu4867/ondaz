@@ -72,7 +72,7 @@ document.querySelector("#app").innerHTML = `
           <label>
             시작 시간 *
             <input name="startTime" type="text" placeholder="예: 오전 10시" required />
-            <small>세팅은 시작 시간 약 2시간 전부터 진행됩니다.</small>
+            <small>세팅은 시작 시간 약 1-2시간 전부터 진행됩니다.</small>
           </label>
           <label class="quote-form__wide">
             행사 장소 *

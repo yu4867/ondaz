@@ -88,12 +88,12 @@ document.querySelector("#app").innerHTML = `
         <div class="bn-guide-card bn-guide-card--fee">
           <span class="bn-guide-card__label">긴급 출력 비용</span>
           <strong>장당 20,000원</strong>
-          <span>전달 기한을 넘기는 경우 긴급 출력 비용이 발생할 수 있습니다.</span>
+          <span>전달 기한을 넘기는 경우 비용이 발생할 수 있습니다.</span>
         </div>
         <div class="bn-guide-card bn-guide-card--fee">
           <span class="bn-guide-card__label">디자이너 연결 비용</span>
           <strong>기본 30,000원</strong>
-          <span>디자인 작업이 어려우신 경우 추가 가능합</span>
+          <span>디자인 작업이 어려우신 경우 추가 가능합니다.</span>
         </div>
       </div>
     </section>
@@ -106,7 +106,7 @@ document.querySelector("#app").innerHTML = `
       </div>
       <div class="print-tier-grid">
         <div class="print-tier">
-          <p class="print-tier__amount">60만원 이상</p>
+          <p class="print-tier__amount">50만 원 이상</p>
           <ul class="print-tier__list">
             <li>오른쪽 현수막</li>
             <li>32인치 모니터</li>
@@ -125,14 +125,13 @@ document.querySelector("#app").innerHTML = `
           <ul class="print-tier__list">
             <li><strong>왼쪽 현수막</strong></li>
             <li>오른쪽 현수막</li>
+            <li>32인치 모니터</li>
             <li>X배너</li>
             <li><strong>원형 스티커</strong></li>
           </ul>
         </div>
       </div>
       <div class="bn-notes">
-        <p>* 출력물 디자인 완성파일은 평일 기준 행사 5일 전까지 전달 부탁드립니다.</p>
-        <p>* 긴급건인 경우 유선 연락 부탁드립니다.</p>
       </div>
     </section>
 

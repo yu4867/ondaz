@@ -21,7 +21,7 @@ const DESSERTS = [
 ];
 
 const REGIONS = [
-  { id: "seoul-south-gyeonggi", label: "서울, 경기남부권", fee: 100000, display: "100,000원" },
+  { id: "seoul-south-gyeonggi", label: "서울, 경기남부권", fee: 70000, display: "70,000~100,000원" },
   { id: "north-outer-gyeonggi", label: "경기북부, 외곽", fee: 120000, display: "120,000~150,000원" },
   { id: "cheonan-asan", label: "천안, 아산", fee: 120000, display: "120,000원" },
   { id: "chungcheong", label: "충청권", fee: 150000, display: "150,000원" },
@@ -29,14 +29,16 @@ const REGIONS = [
   { id: "jeju-islands", label: "제주 및 섬지역권", fee: 1000000, display: "1,000,000원~" },
 ];
 
-const FEE = { extraHour: 50000, generator: 70000, designer: 30000 };
-const MIN_ORDER = 500000;
+const FEE = { extraHour: 30000, generator: 50000, designer: 30000 };
+const MIN_QTY = 50;
+const MIN_DRINK_ORDER = 300000;
+const MIN_DESSERT_QTY = 50;
 
 const state = {
   drinkId: "basic",
   drinkQty: 100,
   dessertId: "none",
-  dessertQty: 70,
+  dessertQty: 50,
   regionId: "seoul-south-gyeonggi",
   extraHours: 0,
   hasPower: true,
@@ -79,6 +81,7 @@ document.querySelector("#app").innerHTML = `
 
           <div class="sq-card">
             <p class="sq-card__title">음료 선택 *</p>
+            <p class="sq-card__note">음료는 금액으로 30만 원 이상 주문 필요합니다.</p>
             <div class="sq-drink-group">
               ${DRINKS.map(d => `
                 <label class="sq-drink-card">
@@ -93,7 +96,7 @@ document.querySelector("#app").innerHTML = `
               <div class="sq-qty-row">
                 <div class="sq-qty-wrap">
                   <button class="sq-qty-btn" data-target="drinkQty" data-dir="-1">−</button>
-                  <input id="drinkQty" class="sq-qty-input" type="number" value="${state.drinkQty}" min="1" />
+                  <input id="drinkQty" class="sq-qty-input" type="number" value="${state.drinkQty}" min="${MIN_QTY}" />
                   <button class="sq-qty-btn" data-target="drinkQty" data-dir="1">+</button>
                 </div>
               </div>
@@ -102,6 +105,7 @@ document.querySelector("#app").innerHTML = `
 
           <div class="sq-card">
             <p class="sq-card__title">디저트 선택</p>
+            <p class="sq-card__note">디저트는 개수로 50개 이상 주문 필요합니다.</p>
             <div class="sq-dessert-group">
               ${DESSERTS.map(d => `
                 <label class="sq-dessert-row">
@@ -116,7 +120,7 @@ document.querySelector("#app").innerHTML = `
               <div class="sq-qty-row">
                 <div class="sq-qty-wrap">
                   <button class="sq-qty-btn" data-target="dessertQty" data-dir="-1">−</button>
-                  <input id="dessertQty" class="sq-qty-input" type="number" value="${state.dessertQty}" min="1" />
+                  <input id="dessertQty" class="sq-qty-input" type="number" value="${state.dessertQty}" min="${MIN_QTY}" />
                   <button class="sq-qty-btn" data-target="dessertQty" data-dir="1">+</button>
                 </div>
               </div>
@@ -224,7 +228,10 @@ function renderResult() {
   const subtotal = menuAmt + region.fee + extraHourCost + generatorCost + designerCost;
   const vat = Math.round(subtotal * 0.1);
   const total = subtotal + vat;
-  const belowMin = menuAmt < MIN_ORDER;
+  const warnings = [
+    drinkCost < MIN_DRINK_ORDER && `음료 주문 금액이 ${fmt(MIN_DRINK_ORDER)} 미만입니다.`,
+    dessert.id !== "none" && state.dessertQty < MIN_DESSERT_QTY && `디저트는 ${MIN_DESSERT_QTY}개 이상 주문해야 합니다.`,
+  ].filter(Boolean);
 
   const rows = [
     { label: drink.label, detail: `${state.drinkQty}${drink.unit} × ${fmt(drink.price)}`, value: drinkCost },
@@ -251,7 +258,7 @@ function renderResult() {
       <div class="sq-row sq-row--total"><span>예상 합계</span><span>${fmt(total)}</span></div>
     </div>
     <p class="sq-disclaimer">참고 단가 기준의 예상 금액으로 실제 견적과 다를 수 있습니다.</p>
-    ${belowMin ? `<div class="sq-warning">음료와 디저트 합산액이 ${fmt(MIN_ORDER)} 미만입니다.</div>` : ""}
+    ${warnings.length ? `<div class="sq-warning">${warnings.join("<br>")}</div>` : ""}
     <a class="button button--primary sq-cta" href="/quote.html">견적 문의하기</a>
   `;
 }
@@ -279,7 +286,7 @@ document.querySelectorAll("input[name='drinkId']").forEach(el => {
 });
 
 document.getElementById("drinkQty").addEventListener("input", e => {
-  state.drinkQty = Math.max(1, parseInt(e.target.value) || 1);
+  state.drinkQty = Math.max(MIN_QTY, parseInt(e.target.value) || MIN_QTY);
   e.target.value = state.drinkQty;
   renderResult();
 });
@@ -293,7 +300,7 @@ document.querySelectorAll("input[name='dessertId']").forEach(el => {
 });
 
 document.getElementById("dessertQty").addEventListener("input", e => {
-  state.dessertQty = Math.max(1, parseInt(e.target.value) || 1);
+  state.dessertQty = Math.max(MIN_QTY, parseInt(e.target.value) || MIN_QTY);
   e.target.value = state.dessertQty;
   renderResult();
 });
@@ -324,10 +331,10 @@ document.querySelectorAll(".sq-qty-btn").forEach(btn => {
     const dir = parseInt(btn.dataset.dir);
 
     if (target === "drinkQty") {
-      state.drinkQty = Math.max(1, state.drinkQty + dir * 10);
+      state.drinkQty = Math.max(MIN_QTY, state.drinkQty + dir * 10);
       document.getElementById("drinkQty").value = state.drinkQty;
     } else if (target === "dessertQty") {
-      state.dessertQty = Math.max(1, state.dessertQty + dir * 10);
+      state.dessertQty = Math.max(MIN_QTY, state.dessertQty + dir * 10);
       document.getElementById("dessertQty").value = state.dessertQty;
     } else if (target === "extraHours") {
       state.extraHours = Math.max(0, Math.min(4, state.extraHours + dir));

@@ -72,7 +72,7 @@ document.querySelector("#app").innerHTML = `
           <summary>
             <span class="accordion-icon icon-people" aria-hidden="true"></span>
             <span class="accordion-title">
-              <strong>현장 인원 및 수량 체크 후 문의 내용 전달</strong>
+              <strong>현장 인원 및 수량 체크</strong>
               <small>담당자 확인 후 문의 양식 작성</small>
             </span>
             <span class="accordion-toggle">⌄</span>
@@ -100,13 +100,11 @@ document.querySelector("#app").innerHTML = `
             </ul>
             <h3>취소 위약금 안내 (행사일 기준)</h3>
             <ul>
-              <li>4일 전 취소 : 무료</li>
-              <li>2~3일 전 취소 : 예약금 50%</li>
-              <li>1일 전/당일 취소 : 예약금 100%</li>
+              <li>5일 전 취소 : 예약금 100% 환불</li>
+              <li>3일 전 취소 : 예약금 50% 환불</li>
+              <li>1일 전 및 당일 취소 : 예약금 환불 불가</li>
             </ul>
-            <p>일정 변경은 가능하나, 불가능할 시 위약금 동일 적용됩니다.</p>
-            <p>디저트는 행사 전날 준비 및 당일 생산을 원칙으로 하므로, 일정 변경 시 이미 준비 및 제작된 디저트에 대해 위약금이 발생할 수 있습니다.</p>
-            <p>우천, 태풍 등과 같은 천재지변으로 인한 취소의 경우 위약금 발생하지 않습니다.</p>
+            <p>디저트 금액은 예약금 환불 불가 항목입니다.</p>
           </div>
         </details>
       </div>
@@ -132,7 +130,7 @@ document.querySelector("#app").innerHTML = `
             <ul>
               <li>기본 운영시간 : 2시간</li>
               <li>추가 이용 : 시간당 20,000원 별도 발생</li>
-              <li>준비 시간 : 원활한 운영을 위해 행사 약 1시간 전 도착 (교통상황에 따라 달라질 수 있습니다.)</li>
+              <li>준비 시간 : 원활한 운영을 위해 행사 약 1-2시간 전 도착 (교통상황에 따라 달라질 수 있습니다.)</li>
             </ul>
           </div>
         </details>
@@ -149,9 +147,9 @@ document.querySelector("#app").innerHTML = `
           <div class="accordion-content">
             <ul>
               <li>예약 시기 : 서포트 날짜 기준 최소 5일 전</li>
-              <li>예약 방법 : 카카오 채널톡을 통해 문의 주시면, 순차적으로 연락 드립니다.</li>
+              <li>예약 방법 : 카카오 채널톡 또는 유선을 통해 문의 주시면 됩니다.</li>
               <li>긴급 서포트 : 반드시 전화 문의 부탁드립니다.</li>
-              <li>문의 방법 : 페이지 하단 '온라인 견적 문의하기'를 이용해주세요.</li>
+              <li>문의 방법 : 페이지 상단 '견적 문의'를 이용해주세요.</li>
             </ul>
           </div>
         </details>
@@ -169,27 +167,15 @@ document.querySelector("#app").innerHTML = `
             <div class="quantity-table">
               <div class="quantity-table__head">
                 <strong>구분</strong>
-                <strong>최소 수량</strong>
+                <strong>최소 주문 기준</strong>
               </div>
               <div>
-                <span>음료만 진행 시 (시그니처)</span>
-                <span>150잔 이상</span>
+                <span>음료</span>
+                <span>주문 금액 30만원 이상</span>
               </div>
               <div>
-                <span>음료만 진행 시 (프리미엄)</span>
-                <span>170잔 이상</span>
-              </div>
-              <div>
-                <span>음료 / 디저트</span>
-                <span>70개 이상</span>
-              </div>
-              <div>
-                <span>베이커리 단품세트 메뉴</span>
-                <span>70인분 이상</span>
-              </div>
-              <div>
-                <span>프리미엄 & 스페셜 메뉴</span>
-                <span>100인분 이상</span>
+                <span>디저트</span>
+                <span>50개 이상</span>
               </div>
             </div>
             <p>자세한 설명은 메뉴안내를 참고해주세요.</p>
@@ -211,17 +197,11 @@ document.querySelector("#app").innerHTML = `
               <strong>음료 비용 + (디저트 비용) + 출장비 + 출력비 = 총 금액 (VAT 별도)</strong>
             </div>
             <ul>
-              <li>최소 주문 금액 : 500,000원 이상 *최소주문금액 = [음료 + 디저트] 가격</li>
-              <li>디저트 선택 시 : 디저트 비용 별도 추가</li>
+              <li>최소 주문 기준 : 음료 주문 금액 30만원 이상, 디저트 50개 이상</li>
               <li>기본 출장비 : 70,000원 (거리/지역에 따라 추가 발생)</li>
-              <li>출력비 : 음료비용 + (디저트비용)에 따라 서비스 제공 *디자인안내 참고</li>
+              <li>출력비 : 음료비용 + (디저트비용)에 따라 서비스 제공 <a class="guide-inline-link" href="/banner.html">배너 안내</a> 참고</li>
               <li>전기 사용 불가 시 : 발전기 대여료 50,000원 추가 발생 (2시간 기준)</li>
             </ul>
-            <h3>EXAMPLE</h3>
-            <ol>
-              <li>음료만 + 출장비 + 출력비 = 총 금액 (VAT 별도)</li>
-              <li>음료 + 디저트 + 출장비 + 출력비 = 총 금액 (VAT 별도)</li>
-            </ol>
           </div>
         </details>
       </div>
