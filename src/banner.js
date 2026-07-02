@@ -106,7 +106,7 @@ document.querySelector("#app").innerHTML = `
         </div>
         <div class="bn-guide-card bn-guide-card--fee">
           <span class="bn-guide-card__label">디자이너 연결 비용</span>
-          <strong>기본 30,000원</strong>
+          <strong>장당 30,000원</strong>
           <span>디자인 작업이 어려우신 경우</br>추가 가능합니다.</span>
         </div>
       </div>

@@ -99,13 +99,13 @@ document.querySelector("#app").innerHTML = `
             <legend>디자이너 제작물 요청</legend>
             <label><input type="radio" name="designer" value="요청" /> 요청</label>
             <label><input type="radio" name="designer" value="요청 안 함" /> 요청 안 함</label>
-            <p>배너나 스티커 디자인이 필요한 경우 선택해주세요. 디자인 제작은 별도 비용이 발생할 수 있습니다. (기본 30,000원)</p>
+            <p>배너나 스티커 디자인이 필요한 경우 선택해주세요.</br><strong>(디자인 제작 장당 30,000원)</strong></p>
           </fieldset>
 
           <div class="quote-notice quote-form__wide">
             <h3>확인해주세요</h3>
-            <p>견적문의 제출 후 입력하신 내용을 복사해 카카오톡 문의로 이동합니다. 카카오톡 채팅방에 붙여넣어 주시면 접수가 완료됩니다.</p>
-            <p>일정과 장소, 메뉴 구성에 따라 최종 견적이 달라질 수 있으며, 세부 내용 확인 후 정확한 금액을 안내드립니다.</p>
+            <p>견적문의 제출 후 입력하신 내용을 복사해 카카오톡 문의로 이동합니다.</br>카카오톡 채팅방에 붙여넣어 주시면 접수가 완료됩니다.</p>
+            <p>일정과 장소, 메뉴 구성에 따라 최종 견적이 다소 달라질 수 있습니다.</p>
           </div>
           <button type="submit">견적문의 내용 복사하기</button>
         </form>
