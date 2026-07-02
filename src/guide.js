@@ -129,7 +129,7 @@ document.querySelector("#app").innerHTML = `
           <div class="accordion-content">
             <ul>
               <li>기본 운영시간 : 2시간</li>
-              <li>추가 이용 : 시간당 20,000원 별도 발생</li>
+              <li>추가 이용 : 시간당 30,000원 별도 발생</li>
               <li>준비 시간 : 원활한 운영을 위해 행사 약 1-2시간 전 도착 (교통상황에 따라 달라질 수 있습니다.)</li>
             </ul>
           </div>
