@@ -1,8 +1,8 @@
 import "./styles.css";
 import { setupMobileNav } from "./nav.js";
-import basicMenuImage from "../image/menu/basic메뉴.png";
-import standardMenuImage from "../image/menu/standard 메뉴.png";
-import allMenuImage from "../image/menu/전메뉴.png";
+import basicMenuImage from "../image/menu/basic.png";
+import standardMenuImage from "../image/menu/standard.png";
+import allMenuImage from "../image/menu/all.png";
 import snackMenuImage from "../image/menu/스낵.png";
 import bakeryMenuImage from "../image/menu/베이커리.png";
 
