@@ -2558,6 +2558,11 @@ p {
   margin: 0 auto;
 }
 
+.bn-gallery-category--horizontal-banner .bn-gallery-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 1120px;
+}
+
 .bn-sample {
   display: grid;
   gap: 14px;
