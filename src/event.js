@@ -1,9 +1,16 @@
 import "./styles.css";
 import { setupMobileNav } from "./nav.js";
 import { renderTopMarquee } from "./marquee.js";
-
-const STORAGE_KEY = "ondaz-event-content";
-const EDITOR_PASSWORD = "8961";
+import {
+  EDITOR_PASSWORD,
+  EMPTY_EVENT,
+  EVENT_STATUS_LABELS,
+  createEvent,
+  escapeHtml,
+  loadEvents,
+  renderFloatingContactButtons,
+  saveEvents,
+} from "./event-store.js";
 
 const NAV = `
   ${renderTopMarquee()}
@@ -25,69 +32,15 @@ const NAV = `
   </header>
 `;
 
-const EMPTY_EVENT = {
-  title: "ONDAZ 이벤트",
-  body: "등록된 이벤트가 없습니다.",
-  image: "",
-  imageRatio: "",
-  status: "progress",
-};
-
-const EVENT_STATUS_LABELS = {
-  progress: "진행 중",
-  done: "완료",
-};
-
-function createEvent(overrides = {}) {
-  return {
-    id: overrides.id || `event-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-    title: overrides.title || "ONDAZ 이벤트",
-    body: overrides.body || "이벤트 내용을 입력해 주세요.",
-    image: overrides.image || "",
-    imageRatio: overrides.imageRatio || "",
-    status: overrides.status in EVENT_STATUS_LABELS ? overrides.status : "progress",
-  };
-}
-
-function normalizeEvents(value) {
-  if (Array.isArray(value)) {
-    return value.map((eventData) => createEvent(eventData)).filter(Boolean);
-  }
-
-  if (value && typeof value === "object") {
-    return [createEvent(value)];
-  }
-
-  return [];
-}
-
-function loadEvents() {
-  try {
-    return normalizeEvents(JSON.parse(localStorage.getItem(STORAGE_KEY)));
-  } catch {
-    return [];
-  }
-}
-
-function saveEvents(events) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
-}
-
 function getSelectedStatus(statusInput) {
   return statusInput.value in EVENT_STATUS_LABELS ? statusInput.value : "progress";
 }
 
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
 function renderEventCard(eventData) {
   const status = eventData.status in EVENT_STATUS_LABELS ? eventData.status : "progress";
+  const canOpenDetail = status === "progress" && eventData.id;
+  const tagName = canOpenDetail ? "a" : "article";
+  const detailHref = canOpenDetail ? ` href="/event-detail.html?id=${encodeURIComponent(eventData.id)}"` : "";
   const imageStyle = [
     eventData.image ? `background-image: url('${eventData.image}');` : "",
     eventData.imageRatio ? `aspect-ratio: ${eventData.imageRatio};` : "",
@@ -96,7 +49,7 @@ function renderEventCard(eventData) {
     .join(" ");
 
   return `
-    <article class="event-preview" data-event-id="${eventData.id || ""}">
+    <${tagName} class="event-preview${canOpenDetail ? " event-preview--link" : ""}"${detailHref} data-event-id="${eventData.id || ""}">
       <div class="event-preview__image"${imageStyle ? ` style="${imageStyle}"` : ""}></div>
       <div class="event-preview__content">
         <div class="event-preview__badges">
@@ -105,8 +58,9 @@ function renderEventCard(eventData) {
         </div>
         <h2>${escapeHtml(eventData.title || EMPTY_EVENT.title)}</h2>
         <p>${escapeHtml(eventData.body || EMPTY_EVENT.body)}</p>
+        ${canOpenDetail ? `<span class="event-preview__more">자세히 보기</span>` : ""}
       </div>
-    </article>
+    </${tagName}>
   `;
 }
 
@@ -366,6 +320,8 @@ document.querySelector("#app").innerHTML = `
     <p>커피차 서비스 · 기업 행사 · 촬영 현장 · 브랜드 프로모션</p>
     <p>문의: yu4867@naver.com · 연락처 0508-9306-5718</p>
   </footer>
+
+  ${renderFloatingContactButtons()}
 `;
 
 setupMobileNav();

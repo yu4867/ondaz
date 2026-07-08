@@ -12,6 +12,7 @@ export default defineConfig({
         selfQuote: resolve(__dirname, "self-quote.html"),
         banner: resolve(__dirname, "banner.html"),
         event: resolve(__dirname, "event.html"),
+        eventDetail: resolve(__dirname, "event-detail.html"),
       },
     },
   },
