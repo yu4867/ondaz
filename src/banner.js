@@ -18,10 +18,16 @@ import banner3 from "../image/출력물 안내/현수막(3).png";
 import banner4 from "../image/출력물 안내/현수막(4).png";
 import banner5 from "../image/출력물 안내/현수막(5).png";
 import banner6 from "../image/출력물 안내/현수막(6).png";
+import xBanner1 from "../image/출력물 안내/x배너 (1).png";
+import xBanner2 from "../image/출력물 안내/x배너 (2).png";
+import xBanner3 from "../image/출력물 안내/x배너 (3).png";
+import xBanner4 from "../image/출력물 안내/x배너 (4).png";
+import xBanner5 from "../image/출력물 안내/x배너 (5).png";
 
 const circleStickerSamples = [circleSticker1, circleSticker2, circleSticker3, circleSticker4, circleSticker5];
 const horizontalBannerSamples = [horizontalBanner1, horizontalBanner2, horizontalBanner3, horizontalBanner4, horizontalBanner5];
 const bannerSamples = [banner1, banner2, banner3, banner4, banner5, banner6];
+const xBannerSamples = [xBanner1, xBanner2, xBanner3, xBanner4, xBanner5];
 
 const NAV = `
   ${renderTopMarquee()}
@@ -159,7 +165,7 @@ document.querySelector("#app").innerHTML = `
           </div>
         </section>
 
-        <section class="bn-gallery-category">
+        <section class="bn-gallery-category bn-gallery-category--horizontal-banner">
           <h3>가로현수막</h3>
           <div class="bn-gallery-grid">
             ${horizontalBannerSamples.map((image, index) => `
@@ -185,7 +191,14 @@ document.querySelector("#app").innerHTML = `
 
         <section class="bn-gallery-category">
           <h3>X배너</h3>
-          <div class="bn-gallery-empty">샘플 준비 중</div>
+          <div class="bn-gallery-grid">
+            ${xBannerSamples.map((image, index) => `
+              <figure class="bn-sample bn-sample--banner">
+                <img class="bn-sample__img" src="${image}" alt="X배너 예시 ${index + 1}" loading="lazy" />
+                <figcaption class="bn-sample__label">X배너 ${index + 1}</figcaption>
+              </figure>
+            `).join("")}
+          </div>
         </section>
       </div>
     </section>

@@ -647,7 +647,8 @@ p {
 }
 
 .menu-image-grid--drink {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 980px;
 }
 
 .menu-image-card {
@@ -679,7 +680,6 @@ p {
   display: grid;
   min-height: 320px;
   overflow: hidden;
-  border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--white);
 }
@@ -1801,9 +1801,12 @@ p {
 
   .dessert-grid,
   .dessert-note,
-  .menu-image-grid,
-  .menu-image-grid--drink {
+  .menu-image-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .menu-image-grid--drink {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .menu-comparison__head span:first-child {
@@ -1920,6 +1923,11 @@ p {
   .menu-image-grid,
   .menu-image-grid--drink {
     grid-template-columns: 1fr;
+  }
+
+  .menu-image-frame,
+  .menu-page-section--drink .menu-image-frame {
+    min-height: 0;
   }
 
   .checklist div {
@@ -2555,6 +2563,11 @@ p {
   gap: 20px;
   max-width: 980px;
   margin: 0 auto;
+}
+
+.bn-gallery-category--horizontal-banner .bn-gallery-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 1120px;
 }
 
 .bn-sample {
