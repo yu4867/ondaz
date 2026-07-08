@@ -1,7 +1,9 @@
 import "./styles.css";
 import { setupMobileNav } from "./nav.js";
+import { renderTopMarquee } from "./marquee.js";
 
 document.querySelector("#app").innerHTML = `
+  ${renderTopMarquee()}
   <header class="site-header">
     <a class="brand brand--crimson" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
     <button class="hamburger" aria-label="메뉴 열기" aria-expanded="false">
@@ -14,7 +16,7 @@ document.querySelector("#app").innerHTML = `
       <a href="/event.html">이벤트</a>
       <div class="nav-btn-group">
         <a href="/self-quote.html" class="nav-btn nav-btn--ghost">셀프 견적</a>
-        <a href="/quote.html" class="nav-btn nav-btn--primary">견적문의</a>
+        <a href="/quote.html" class="nav-btn nav-btn--primary">견적 문의</a>
       </div>
     </nav>
   </header>

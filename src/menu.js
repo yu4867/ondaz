@@ -1,5 +1,6 @@
 import "./styles.css";
 import { setupMobileNav } from "./nav.js";
+import { renderTopMarquee } from "./marquee.js";
 import basicMenuImage from "../image/menu/basic메뉴.png";
 import standardMenuImage from "../image/menu/standard 메뉴.png";
 import allMenuImage from "../image/menu/전메뉴.png";
@@ -32,18 +33,7 @@ const renderMenuImage = ({ title, subtitle, image, alt, price, pending = false }
 `;
 
 document.querySelector("#app").innerHTML = `
-  <div class="top-marquee" aria-label="ONDAZ 안내">
-    <div class="top-marquee__track">
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-    </div>
-  </div>
+  ${renderTopMarquee()}
 
   <header class="site-header">
     <a class="brand brand--crimson" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
@@ -57,7 +47,7 @@ document.querySelector("#app").innerHTML = `
       <a href="/event.html">이벤트</a>
       <div class="nav-btn-group">
         <a href="/self-quote.html" class="nav-btn nav-btn--ghost">셀프 견적</a>
-        <a href="/quote.html" class="nav-btn nav-btn--primary">견적문의</a>
+        <a href="/quote.html" class="nav-btn nav-btn--primary">견적 문의</a>
       </div>
     </nav>
   </header>

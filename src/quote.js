@@ -1,19 +1,9 @@
 import "./styles.css";
 import { setupMobileNav } from "./nav.js";
+import { renderTopMarquee } from "./marquee.js";
 
 document.querySelector("#app").innerHTML = `
-  <div class="top-marquee" aria-label="ONDAZ 안내">
-    <div class="top-marquee__track">
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-    </div>
-  </div>
+  ${renderTopMarquee()}
 
   <header class="site-header">
     <a class="brand brand--crimson" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
@@ -27,7 +17,7 @@ document.querySelector("#app").innerHTML = `
       <a href="/event.html">이벤트</a>
       <div class="nav-btn-group">
         <a href="/self-quote.html" class="nav-btn nav-btn--ghost">셀프 견적</a>
-        <a href="/quote.html" class="nav-btn nav-btn--primary">견적문의</a>
+        <a href="/quote.html" class="nav-btn nav-btn--primary">견적 문의</a>
       </div>
     </nav>
   </header>
@@ -35,7 +25,7 @@ document.querySelector("#app").innerHTML = `
   <main>
     <section class="page-hero quote-page-hero">
       <p class="eyebrow">Quote Request</p>
-      <h1>프로젝트 상담 및 견적문의</h1>
+      <h1>프로젝트 상담 및 견적 문의</h1>
       <p>* 아래 항목을 남겨주시면 확인 후 빠르게 안내드리겠습니다.</p>
     </section>
 
@@ -104,10 +94,10 @@ document.querySelector("#app").innerHTML = `
 
           <div class="quote-notice quote-form__wide">
             <h3>확인해주세요</h3>
-            <p>견적문의 제출 후 입력하신 내용을 복사해 카카오톡 문의로 이동합니다.</br>카카오톡 채팅방에 붙여넣어 주시면 접수가 완료됩니다.</p>
+            <p>견적 문의 제출 후 입력하신 내용을 복사해 카카오톡 문의로 이동합니다.</br>카카오톡 채팅방에 붙여넣어 주시면 접수가 완료됩니다.</p>
             <p>일정과 장소, 메뉴 구성에 따라 최종 견적이 다소 달라질 수 있습니다.</p>
           </div>
-          <button type="submit">견적문의 내용 복사하기</button>
+          <button type="submit">견적 문의 내용 복사하기</button>
         </form>
       </div>
     </section>
@@ -116,7 +106,7 @@ document.querySelector("#app").innerHTML = `
   <div class="quote-modal-overlay" id="quoteModal" role="dialog" aria-modal="true">
     <div class="quote-modal">
       <div class="quote-modal__header">
-        <h3 class="quote-modal__title">프로젝트 상담 및 견적문의 내용이 준비됐습니다</h3>
+        <h3 class="quote-modal__title">프로젝트 상담 및 견적 문의 내용이 준비됐습니다</h3>
         <button class="quote-modal__close" id="quoteModalClose" aria-label="닫기">×</button>
       </div>
       <pre class="quote-modal__content" id="quoteModalContent"></pre>
@@ -133,14 +123,14 @@ document.querySelector("#app").innerHTML = `
     <p>문의: yu4867@naver.com · 연락처: 0508-9306-5718</p>
   </footer>
 
-  <a href="tel:05040802129" class="phone-fab" aria-label="전화로 견적문의">
+  <a href="tel:05040802129" class="phone-fab" aria-label="전화로 견적 문의">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
       <path fill="#ffffff" d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/>
     </svg>
     <span class="phone-fab__label">전화 문의</span>
   </a>
 
-  <a href="http://pf.kakao.com/_IcCPX/chat" class="kakao-fab" target="_blank" rel="noopener noreferrer" aria-label="카카오톡으로 견적문의">
+  <a href="http://pf.kakao.com/_IcCPX/chat" class="kakao-fab" target="_blank" rel="noopener noreferrer" aria-label="카카오톡으로 견적 문의">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
       <path fill="#3C1E1E" d="M12 3C6.93 3 2.5 6.58 2.5 11c0 2.8 1.68 5.27 4.24 6.78L5.5 22l4.74-2.48c.56.08 1.14.12 1.76.12 5.07 0 9.5-3.58 9.5-8S17.07 3 12 3z"/>
     </svg>
@@ -167,7 +157,7 @@ quoteForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const form = new FormData(quoteForm);
   const lines = [
-    "[ONDAZ 프로젝트 상담 및 견적문의]",
+    "[ONDAZ 프로젝트 상담 및 견적 문의]",
     `신청자명 / 업체명 / 담당자명: ${form.get("customer") || ""}`,
     `연락처: ${form.get("phone") || ""}`,
     `수령자명: ${form.get("recipient") || ""}`,

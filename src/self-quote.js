@@ -1,5 +1,6 @@
 import "./styles.css";
 import { setupMobileNav } from "./nav.js";
+import { renderTopMarquee } from "./marquee.js";
 
 const DRINKS = [
   { id: "basic", label: "베이직 세트", price: 3000, unit: "잔" },
@@ -50,7 +51,8 @@ function fmt(n) {
 }
 
 document.querySelector("#app").innerHTML = `
-  <div class="top-marquee" aria-label="ONDAZ 안내"><div class="top-marquee__track"><span>오늘의 공간을 카페로, ONDAZ</span><span>7월 여름 한정 30만 원 이벤트 🖤</span><span>오늘의 공간을 카페로, ONDAZ</span><span>7월 여름 한정 30만 원 이벤트 🖤</span><span>오늘의 공간을 카페로, ONDAZ</span><span>7월 여름 한정 30만 원 이벤트 🖤</span><span>오늘의 공간을 카페로, ONDAZ</span><span>7월 여름 한정 30만 원 이벤트 🖤</span></div></div>  <header class="site-header">
+  ${renderTopMarquee()}
+  <header class="site-header">
     <a class="brand brand--crimson" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
     <button class="hamburger" aria-label="메뉴 열기" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -62,7 +64,7 @@ document.querySelector("#app").innerHTML = `
       <a href="/event.html">이벤트</a>
       <div class="nav-btn-group">
         <a href="/self-quote.html" class="nav-btn nav-btn--ghost">셀프 견적</a>
-        <a href="/quote.html" class="nav-btn nav-btn--primary">견적문의</a>
+        <a href="/quote.html" class="nav-btn nav-btn--primary">견적 문의</a>
       </div>
     </nav>
   </header>

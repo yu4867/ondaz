@@ -1,6 +1,7 @@
 import "./styles.css";
 import printGuideImage from "../image/출력물 안내.png";
 import { setupMobileNav } from "./nav.js";
+import { renderTopMarquee } from "./marquee.js";
 import circleSticker1 from "../image/출력물 안내/원형스티커 (1).png";
 import circleSticker2 from "../image/출력물 안내/원형스티커 (2).png";
 import circleSticker3 from "../image/출력물 안내/원형스티커 (3).png";
@@ -23,18 +24,7 @@ const horizontalBannerSamples = [horizontalBanner1, horizontalBanner2, horizonta
 const bannerSamples = [banner1, banner2, banner3, banner4, banner5, banner6];
 
 const NAV = `
-  <div class="top-marquee" aria-label="ONDAZ 안내">
-    <div class="top-marquee__track">
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-    </div>
-  </div>
+  ${renderTopMarquee()}
 
   <header class="site-header">
     <a class="brand brand--crimson" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
@@ -48,7 +38,7 @@ const NAV = `
       <a href="/event.html">이벤트</a>
       <div class="nav-btn-group">
         <a href="/self-quote.html" class="nav-btn nav-btn--ghost">셀프 견적</a>
-        <a href="/quote.html" class="nav-btn nav-btn--primary">견적문의</a>
+        <a href="/quote.html" class="nav-btn nav-btn--primary">견적 문의</a>
       </div>
     </nav>
   </header>

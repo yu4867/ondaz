@@ -1,6 +1,7 @@
 import "./styles.css";
-import mainImage from "../main2.png";
+import mainImage from "../image/wedding.png";
 import { setupMobileNav } from "./nav.js";
+import { renderTopMarquee } from "./marquee.js";
 import whyImage1 from "../image/1.png";
 import whyImage2 from "../image/2.png";
 import whyImage3 from "../image/3.png";
@@ -9,20 +10,8 @@ import whyImage5 from "../image/5.png";
 import whyImage6 from "../image/6.png";
 
 const whyImages = [whyImage1, whyImage2, whyImage3, whyImage4, whyImage5, whyImage6];
-
 document.querySelector("#app").innerHTML = `
-  <div class="top-marquee" aria-label="ONDAZ 안내">
-    <div class="top-marquee__track">
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-      <span>오늘의 공간을 카페로, ONDAZ</span>
-      <span>7월 여름 한정 30만 원 이벤트 🖤</span>
-    </div>
-  </div>
+  ${renderTopMarquee()}
 
   <header class="site-header">
     <a class="brand brand--crimson" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
@@ -36,7 +25,7 @@ document.querySelector("#app").innerHTML = `
       <a href="/event.html">이벤트</a>
       <div class="nav-btn-group">
         <a href="/self-quote.html" class="nav-btn nav-btn--ghost">셀프 견적</a>
-        <a href="/quote.html" class="nav-btn nav-btn--primary">견적문의</a>
+        <a href="/quote.html" class="nav-btn nav-btn--primary">견적 문의</a>
       </div>
     </nav>
   </header>
@@ -52,7 +41,7 @@ document.querySelector("#app").innerHTML = `
           맞춤형 커피차 서비스를 준비합니다.
         </p>
         <div class="hero__actions">
-          <a class="button button--primary" href="/quote.html">견적문의</a>
+          <a class="button button--primary" href="/quote.html">견적 문의</a>
           <a class="button button--ghost" href="/guide.html">이용 안내</a>
         </div>
       </div>
