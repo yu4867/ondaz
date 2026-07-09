@@ -58,12 +58,6 @@ function renderAdminImageItem(imageData, index) {
 
 function renderPage(eventData) {
   const status = eventData.status in EVENT_STATUS_LABELS ? eventData.status : "progress";
-  const imageStyle = [
-    eventData.image ? `background-image: url('${eventData.image}');` : "",
-    eventData.imageRatio ? `aspect-ratio: ${eventData.imageRatio};` : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
   const detailImages = Array.isArray(eventData.detailImages) ? eventData.detailImages : [];
 
   document.querySelector("#event-detail-root").innerHTML = `
@@ -79,16 +73,15 @@ function renderPage(eventData) {
 
     <section class="section event-detail-section">
       <article class="event-detail-card">
-        <div class="event-detail-main-image"${imageStyle ? ` style="${imageStyle}"` : ""}></div>
-        <div class="event-detail-body">
-          <p>${escapeHtml(eventData.body)}</p>
-        </div>
         <div id="event-detail-gallery-wrap">
           ${
             detailImages.length
               ? `<div class="event-detail-gallery">${detailImages.map(renderDetailImage).join("")}</div>`
               : `<p class="event-detail-empty">첨부된 상세 이미지가 없습니다.</p>`
           }
+        </div>
+        <div class="event-detail-body">
+          <p>${escapeHtml(eventData.body)}</p>
         </div>
       </article>
     </section>
