@@ -91,12 +91,7 @@ export async function saveEvents(events) {
 export async function uploadEventImage(file) {
   if (!file) return null;
 
-  const dataUrl = await new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => resolve(reader.result));
-    reader.addEventListener("error", reject);
-    reader.readAsDataURL(file);
-  });
+  const dataUrl = await resizeImageFile(file);
 
   const response = await fetch("/api/event-images", {
     method: "POST",
@@ -114,6 +109,49 @@ export async function uploadEventImage(file) {
   }
 
   return payload.image;
+}
+
+async function resizeImageFile(file) {
+  const originalDataUrl = await readFileAsDataUrl(file);
+
+  if (!file.type.startsWith("image/")) {
+    return originalDataUrl;
+  }
+
+  const image = await loadImage(originalDataUrl);
+  const maxSize = 1600;
+  const scale = Math.min(1, maxSize / Math.max(image.naturalWidth, image.naturalHeight));
+
+  if (scale === 1 && file.size < 1_500_000) {
+    return originalDataUrl;
+  }
+
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+  canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+
+  const context = canvas.getContext("2d");
+  context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+  return canvas.toDataURL("image/jpeg", 0.84);
+}
+
+function readFileAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => resolve(reader.result));
+    reader.addEventListener("error", reject);
+    reader.readAsDataURL(file);
+  });
+}
+
+function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.addEventListener("load", () => resolve(image));
+    image.addEventListener("error", reject);
+    image.src = src;
+  });
 }
 
 export function escapeHtml(value) {

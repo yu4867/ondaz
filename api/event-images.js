@@ -37,7 +37,10 @@ export default async function handler(request, response) {
       upsert: false,
     });
 
-    if (uploadError) throw uploadError;
+    if (uploadError) {
+      console.error("Supabase storage upload failed:", uploadError.message);
+      throw uploadError;
+    }
 
     const { data } = supabase.storage.from(EVENTS_BUCKET).getPublicUrl(path);
     return sendJson(response, 200, {
@@ -48,6 +51,7 @@ export default async function handler(request, response) {
       },
     });
   } catch (error) {
+    console.error("Event image upload failed:", error.message);
     return sendJson(response, 500, { error: error.message || "이미지 업로드 중 오류가 발생했습니다." });
   }
 }
