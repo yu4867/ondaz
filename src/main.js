@@ -172,20 +172,32 @@ document.querySelector("#app").innerHTML = `
         <h2>고객님들의 실제 후기</h2>
         <p>웨딩, 팬서포트, 지역 행사, 사내 행사까지 다양한 현장에서 전해주신 온다즈 이용 후기입니다.</p>
       </div>
-      <div class="review-grid">
-        ${[...reviewItems, ...reviewItems].map((review, index) => `
-          <article class="review-card">
-            <div class="review-card__top">
-              <span>${review.category}</span>
-              <div class="review-card__stars" aria-label="별점 5점">★★★★★</div>
-            </div>
-            <strong>${review.highlight}</strong>
-            <div class="review-card__content" id="review-content-${index}">
-              ${review.paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("")}
-            </div>
-            <button class="review-card__more" type="button" aria-expanded="false" aria-controls="review-content-${index}">더 보기</button>
-          </article>
-        `).join("")}
+      <div class="review-carousel" data-review-carousel>
+        <div class="review-carousel__viewport">
+          <div class="review-grid">
+            ${reviewItems.map((review, index) => `
+              <article class="review-card">
+                <div class="review-card__top">
+                  <span>${review.category}</span>
+                  <div class="review-card__stars" aria-label="별점 5점">★★★★★</div>
+                </div>
+                <strong>${review.highlight}</strong>
+                <div class="review-card__content" id="review-content-${index}">
+                  ${review.paragraphs.map((paragraph) => `<p>${paragraph}</p>`).join("")}
+                </div>
+                <button class="review-card__more" type="button" aria-expanded="false" aria-controls="review-content-${index}">더 보기</button>
+              </article>
+            `).join("")}
+          </div>
+        </div>
+        <div class="review-carousel__controls" aria-label="리뷰 이동">
+          <button class="review-carousel__button" type="button" data-review-prev aria-label="이전 리뷰">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 5 8.5 12l7 7" /></svg>
+          </button>
+          <button class="review-carousel__button" type="button" data-review-next aria-label="다음 리뷰">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.5 5 7 7-7 7" /></svg>
+          </button>
+        </div>
       </div>
     </section>
   </main>
@@ -194,6 +206,7 @@ document.querySelector("#app").innerHTML = `
     <strong>ONDAZ</strong>
     <p>커피차 서비스 · 기업 행사 · 촬영 현장 · 브랜드 프로모션</p>
     <p>문의: yu4867@naver.com · 연락처: 0508-9306-5718</p>
+    <p>대표자 : 배민준 · 서울시 송파구 방이동 48-5, 33호 · 사업자등록번호 : 185-16-02483</p>
   </footer>
 
   <a href="tel:05040802129" class="phone-fab" aria-label="전화로 문의하기">
@@ -212,6 +225,7 @@ document.querySelector("#app").innerHTML = `
 `;
 
 setupMobileNav();
+setupReviewCarousel();
 
 document.querySelectorAll(".review-card__more").forEach((button) => {
   button.addEventListener("click", () => {
@@ -221,3 +235,86 @@ document.querySelectorAll(".review-card__more").forEach((button) => {
     button.textContent = isExpanded ? "접기" : "더 보기";
   });
 });
+
+function setupReviewCarousel() {
+  const carousel = document.querySelector("[data-review-carousel]");
+  if (!carousel) return;
+
+  const viewport = carousel.querySelector(".review-carousel__viewport");
+  const track = carousel.querySelector(".review-grid");
+  const cards = Array.from(track.querySelectorAll(".review-card"));
+  const prevButton = carousel.querySelector("[data-review-prev]");
+  const nextButton = carousel.querySelector("[data-review-next]");
+  let currentIndex = 0;
+  let startX = 0;
+  let dragOffset = 0;
+  let isDragging = false;
+
+  const getStep = () => {
+    if (cards.length < 2) return cards[0]?.getBoundingClientRect().width || 0;
+    return cards[1].offsetLeft - cards[0].offsetLeft;
+  };
+
+  const getMaxIndex = () => {
+    const step = getStep();
+    const cardWidth = cards[0]?.getBoundingClientRect().width || 0;
+    if (!step || !cardWidth) return 0;
+
+    const gap = Math.max(step - cardWidth, 0);
+    const visibleCount = Math.max(1, Math.floor((viewport.clientWidth + gap) / step));
+    return Math.max(cards.length - visibleCount, 0);
+  };
+
+  const moveTo = (nextIndex, animate = true) => {
+    const maxIndex = getMaxIndex();
+    if (nextIndex > maxIndex) currentIndex = 0;
+    else if (nextIndex < 0) currentIndex = maxIndex;
+    else currentIndex = nextIndex;
+
+    track.style.transition = animate ? "" : "none";
+    track.style.transform = `translateX(${-currentIndex * getStep()}px)`;
+
+    if (!animate) {
+      requestAnimationFrame(() => {
+        track.style.transition = "";
+      });
+    }
+  };
+
+  prevButton.addEventListener("click", () => moveTo(currentIndex - 1));
+  nextButton.addEventListener("click", () => moveTo(currentIndex + 1));
+
+  viewport.addEventListener("pointerdown", (event) => {
+    if (event.button !== 0 || event.target.closest("button")) return;
+    isDragging = true;
+    startX = event.clientX;
+    dragOffset = 0;
+    viewport.setPointerCapture(event.pointerId);
+    viewport.classList.add("is-dragging");
+    track.style.transition = "none";
+  });
+
+  viewport.addEventListener("pointermove", (event) => {
+    if (!isDragging) return;
+    dragOffset = event.clientX - startX;
+    track.style.transform = `translateX(${-currentIndex * getStep() + dragOffset}px)`;
+  });
+
+  const endDrag = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    viewport.classList.remove("is-dragging");
+
+    const threshold = Math.min(90, viewport.clientWidth * 0.18);
+    if (Math.abs(dragOffset) > threshold) {
+      moveTo(currentIndex + (dragOffset < 0 ? 1 : -1));
+    } else {
+      moveTo(currentIndex);
+    }
+  };
+
+  viewport.addEventListener("pointerup", endDrag);
+  viewport.addEventListener("pointercancel", endDrag);
+  window.addEventListener("resize", () => moveTo(Math.min(currentIndex, getMaxIndex()), false));
+  moveTo(0, false);
+}

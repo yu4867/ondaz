@@ -1271,20 +1271,31 @@ p {
   background: var(--paper);
 }
 
+.review-carousel {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.review-carousel__viewport {
+  overflow: hidden;
+  touch-action: pan-y;
+  cursor: grab;
+}
+
+.review-carousel__viewport.is-dragging {
+  cursor: grabbing;
+}
+
 .review-grid {
   display: flex;
   gap: 18px;
-  width: max-content;
-  animation: reviewSlide 40s linear infinite;
-}
-
-.review-grid:hover {
-  animation-play-state: paused;
+  transition: transform 0.36s ease;
+  will-change: transform;
 }
 
 .review-card {
   display: flex;
-  flex: 0 0 clamp(300px, 34vw, 520px);
+  flex: 0 0 calc((100% - 36px) / 3);
   flex-direction: column;
   min-height: 430px;
   padding: clamp(26px, 3vw, 36px);
@@ -1370,13 +1381,53 @@ p {
   cursor: pointer;
 }
 
-@keyframes reviewSlide {
-  from {
-    transform: translateX(0);
-  }
+.review-carousel__controls {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
 
-  to {
-    transform: translateX(calc(-50% - 9px));
+.review-carousel__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--coffee);
+  background: var(--white);
+  box-shadow: 0 8px 22px rgba(74, 45, 31, 0.08);
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.review-carousel__button:hover {
+  border-color: var(--coffee);
+  transform: translateY(-1px);
+}
+
+.review-carousel__button svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 1040px) {
+  .review-card {
+    flex-basis: calc((100% - 18px) / 2);
+  }
+}
+
+@media (max-width: 680px) {
+  .review-card {
+    flex-basis: 100%;
+    min-height: 410px;
   }
 }
 
@@ -1969,6 +2020,7 @@ p {
   }
 
   .feature-grid,
+  .promise-grid,
   .review-grid,
   .process,
   .detail-grid,
@@ -2086,6 +2138,7 @@ p {
   }
 
   .feature-grid,
+  .promise-grid,
   .review-grid,
   .process,
   .detail-grid,
