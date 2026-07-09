@@ -1,5 +1,6 @@
 export const STORAGE_KEY = "ondaz-event-content";
-export const EDITOR_PASSWORD = "8961";
+
+let editorPassword = "";
 
 export const EMPTY_EVENT = {
   title: "ONDAZ 이벤트",
@@ -15,13 +16,17 @@ export const EVENT_STATUS_LABELS = {
   done: "완료",
 };
 
+export function setEditorPassword(password) {
+  editorPassword = password;
+}
+
 export function createEvent(overrides = {}) {
   return {
     id: overrides.id || `event-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
     title: overrides.title || "ONDAZ 이벤트",
     body: overrides.body || "이벤트 내용을 입력해 주세요.",
-    image: overrides.image || "",
-    imageRatio: overrides.imageRatio || "",
+    image: overrides.image || overrides.image_url || "",
+    imageRatio: overrides.imageRatio || overrides.image_ratio || "",
     detailImages: Array.isArray(overrides.detailImages) ? overrides.detailImages : [],
     status: overrides.status in EVENT_STATUS_LABELS ? overrides.status : "progress",
   };
@@ -39,16 +44,68 @@ export function normalizeEvents(value) {
   return [];
 }
 
-export function loadEvents() {
+export async function loadEvents() {
   try {
-    return normalizeEvents(JSON.parse(localStorage.getItem(STORAGE_KEY)));
+    const response = await fetch("/api/events");
+    if (!response.ok) throw new Error("Failed to load events");
+    const payload = await response.json();
+    return normalizeEvents(payload.events);
   } catch {
-    return [];
+    try {
+      return normalizeEvents(JSON.parse(localStorage.getItem(STORAGE_KEY)));
+    } catch {
+      return [];
+    }
   }
 }
 
-export function saveEvents(events) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
+export async function saveEvents(events) {
+  const normalizedEvents = normalizeEvents(events);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(normalizedEvents));
+
+  const response = await fetch("/api/events", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      password: editorPassword,
+      events: normalizedEvents,
+    }),
+  });
+
+  if (!response.ok) {
+    const payload = await response.json().catch(() => ({}));
+    throw new Error(payload.error || "이벤트 저장에 실패했습니다.");
+  }
+
+  return normalizedEvents;
+}
+
+export async function uploadEventImage(file) {
+  if (!file) return null;
+
+  const dataUrl = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => resolve(reader.result));
+    reader.addEventListener("error", reject);
+    reader.readAsDataURL(file);
+  });
+
+  const response = await fetch("/api/event-images", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      password: editorPassword,
+      fileName: file.name,
+      dataUrl,
+    }),
+  });
+
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(payload.error || "이미지 업로드에 실패했습니다.");
+  }
+
+  return payload.image;
 }
 
 export function escapeHtml(value) {

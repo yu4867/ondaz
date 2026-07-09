@@ -2,7 +2,6 @@ import "./styles.css";
 import { setupMobileNav } from "./nav.js";
 import { renderTopMarquee } from "./marquee.js";
 import {
-  EDITOR_PASSWORD,
   EMPTY_EVENT,
   EVENT_STATUS_LABELS,
   createEvent,
@@ -10,12 +9,14 @@ import {
   loadEvents,
   renderFloatingContactButtons,
   saveEvents,
+  setEditorPassword,
+  uploadEventImage,
 } from "./event-store.js";
 
 const NAV = `
   ${renderTopMarquee()}
   <header class="site-header">
-    <a class="brand brand--crimson" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
+    <a class="brand brand--crimson" href="/" aria-label="ONDAZ">ONDAZ</a>
     <button class="hamburger" aria-label="메뉴 열기" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -74,7 +75,7 @@ function renderAdminList(events, selectedEventId) {
   const adminList = document.querySelector("#event-admin-list");
 
   if (events.length === 0) {
-    adminList.innerHTML = `<p class="event-admin-empty">작성된 이벤트가 없습니다.</p>`;
+    adminList.innerHTML = `<p class="event-admin-empty">작성한 이벤트가 없습니다.</p>`;
     return;
   }
 
@@ -90,7 +91,7 @@ function renderAdminList(events, selectedEventId) {
     .join("");
 }
 
-function initEditor() {
+async function initEditor() {
   const editOpenButton = document.querySelector("#event-edit-open");
   const passwordForm = document.querySelector("#event-password-form");
   const passwordInput = document.querySelector("#event-password-input");
@@ -107,7 +108,7 @@ function initEditor() {
   const deleteButton = document.querySelector("#event-delete");
   const confirmButton = document.querySelector("#event-confirm");
   const editorStatus = document.querySelector("#event-editor-status");
-  let events = loadEvents();
+  let events = await loadEvents();
   let selectedEventId = events[0]?.id || null;
 
   const selectedEvent = () => events.find((eventData) => eventData.id === selectedEventId) || null;
@@ -124,32 +125,11 @@ function initEditor() {
     imageInput.value = "";
   };
 
-  sync();
-  fillEditor(selectedEvent());
+  const clearEditorStatus = () => {
+    editorStatus.textContent = "";
+  };
 
-  editOpenButton.addEventListener("click", () => {
-    passwordForm.hidden = false;
-    editOpenButton.hidden = true;
-    passwordInput.focus();
-  });
-
-  passwordForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    if (passwordInput.value !== EDITOR_PASSWORD) {
-      passwordError.textContent = "비밀번호가 일치하지 않습니다.";
-      passwordInput.select();
-      return;
-    }
-
-    passwordError.textContent = "";
-    passwordForm.hidden = true;
-    adminPanel.hidden = false;
-    editor.hidden = false;
-    titleInput.focus();
-  });
-
-  const persist = () => {
+  const persist = async () => {
     let next = selectedEvent();
 
     if (!next) {
@@ -162,85 +142,122 @@ function initEditor() {
     next.body = bodyInput.value.trim() || "이벤트 내용을 입력해 주세요.";
     next.status = getSelectedStatus(statusInput);
 
-    saveEvents(events);
+    await saveEvents(events);
     sync();
     return next;
   };
 
-  const clearEditorStatus = () => {
-    editorStatus.textContent = "";
+  const persistWithStatus = async (message = "") => {
+    try {
+      const next = await persist();
+      if (message) editorStatus.textContent = message;
+      return next;
+    } catch (error) {
+      editorStatus.textContent = error.message || "저장 중 오류가 발생했습니다.";
+      return null;
+    }
   };
+
+  sync();
+  fillEditor(selectedEvent());
+
+  editOpenButton.addEventListener("click", () => {
+    passwordForm.hidden = false;
+    editOpenButton.hidden = true;
+    passwordInput.focus();
+  });
+
+  passwordForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    setEditorPassword(passwordInput.value);
+
+    try {
+      await saveEvents(events);
+    } catch {
+      passwordError.textContent = "비밀번호가 일치하지 않습니다.";
+      passwordInput.select();
+      return;
+    }
+
+    passwordError.textContent = "";
+    passwordForm.hidden = true;
+    adminPanel.hidden = false;
+    editor.hidden = false;
+    titleInput.focus();
+  });
 
   titleInput.addEventListener("input", () => {
     clearEditorStatus();
-    persist();
+    persistWithStatus();
   });
   bodyInput.addEventListener("input", () => {
     clearEditorStatus();
-    persist();
+    persistWithStatus();
   });
   statusInput.addEventListener("change", () => {
     clearEditorStatus();
-    persist();
+    persistWithStatus();
   });
 
-  imageInput.addEventListener("change", () => {
+  imageInput.addEventListener("change", async () => {
     const file = imageInput.files?.[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
+    editorStatus.textContent = "이미지를 업로드하고 있습니다.";
+
+    try {
+      const uploaded = await uploadEventImage(file);
       const image = new Image();
-      image.addEventListener("load", () => {
-        persist();
+      image.addEventListener("load", async () => {
+        await persistWithStatus();
         const next = selectedEvent();
         if (!next) return;
 
-        next.image = reader.result;
+        next.image = uploaded.src;
         next.imageRatio = image.naturalWidth && image.naturalHeight ? `${image.naturalWidth} / ${image.naturalHeight}` : "";
-        saveEvents(events);
+        await persistWithStatus("이미지를 저장했습니다.");
         sync();
       });
-      image.src = reader.result;
-    });
-    reader.readAsDataURL(file);
+      image.src = uploaded.src;
+    } catch (error) {
+      editorStatus.textContent = error.message || "이미지 업로드에 실패했습니다.";
+    }
   });
 
-  clearButton.addEventListener("click", () => {
+  clearButton.addEventListener("click", async () => {
     const next = selectedEvent();
     if (!next) return;
 
     imageInput.value = "";
     next.image = "";
     next.imageRatio = "";
-    saveEvents(events);
+    await saveEvents(events);
     sync();
     clearEditorStatus();
   });
 
-  deleteButton.addEventListener("click", () => {
+  deleteButton.addEventListener("click", async () => {
     const next = selectedEvent();
     if (!next) return;
     if (!confirm("선택한 이벤트 글을 삭제할까요?")) return;
 
     events = events.filter((eventData) => eventData.id !== next.id);
     selectedEventId = events[0]?.id || null;
-    saveEvents(events);
+    await saveEvents(events);
     fillEditor(selectedEvent());
     sync();
     editorStatus.textContent = "선택한 글을 삭제했습니다.";
   });
 
-  confirmButton.addEventListener("click", () => {
-    persist();
-    editorStatus.textContent = "이벤트 글을 저장했습니다.";
+  confirmButton.addEventListener("click", async () => {
+    await persistWithStatus("이벤트 글을 저장했습니다.");
   });
 
-  newButton.addEventListener("click", () => {
+  newButton.addEventListener("click", async () => {
     const next = createEvent();
     events = [next, ...events];
     selectedEventId = next.id;
-    saveEvents(events);
+    await saveEvents(events);
     fillEditor(next);
     sync();
     titleInput.focus();

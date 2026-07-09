@@ -2,18 +2,19 @@ import "./styles.css";
 import { setupMobileNav } from "./nav.js";
 import { renderTopMarquee } from "./marquee.js";
 import {
-  EDITOR_PASSWORD,
   EVENT_STATUS_LABELS,
   escapeHtml,
   loadEvents,
   renderFloatingContactButtons,
   saveEvents,
+  setEditorPassword,
+  uploadEventImage,
 } from "./event-store.js";
 
 const NAV = `
   ${renderTopMarquee()}
   <header class="site-header">
-    <a class="brand brand--crimson" href="/" aria-label="ONDAZ 홈">ONDAZ</a>
+    <a class="brand brand--crimson" href="/" aria-label="ONDAZ">ONDAZ</a>
     <button class="hamburger" aria-label="메뉴 열기" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -119,22 +120,7 @@ function renderPage(eventData) {
   `;
 }
 
-function fileToDetailImage(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-      resolve({
-        id: `detail-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-        src: reader.result,
-        alt: file.name.replace(/\.[^.]+$/, ""),
-      });
-    });
-    reader.addEventListener("error", reject);
-    reader.readAsDataURL(file);
-  });
-}
-
-function initDetailAdmin(eventId) {
+function initDetailAdmin(eventId, initialEvents) {
   const openButton = document.querySelector("#event-detail-edit-open");
   const passwordForm = document.querySelector("#event-detail-password-form");
   const passwordInput = document.querySelector("#event-detail-password-input");
@@ -143,6 +129,7 @@ function initDetailAdmin(eventId) {
   const imageInput = document.querySelector("#event-detail-image-input");
   const imageList = document.querySelector("#event-detail-image-list");
   const editorStatus = document.querySelector("#event-detail-editor-status");
+  let events = initialEvents;
 
   const refreshImageList = (eventData) => {
     const detailImages = Array.isArray(eventData.detailImages) ? eventData.detailImages : [];
@@ -157,12 +144,11 @@ function initDetailAdmin(eventId) {
       : `<p class="event-detail-empty">첨부된 상세 이미지가 없습니다.</p>`;
   };
 
-  const updateEvent = (updater) => {
-    const events = loadEvents();
+  const updateEvent = async (updater) => {
     const eventData = findEvent(events, eventId);
     if (!eventData) return null;
     updater(eventData);
-    saveEvents(events);
+    await saveEvents(events);
     refreshPublicGallery(eventData);
     refreshImageList(eventData);
     return eventData;
@@ -174,10 +160,13 @@ function initDetailAdmin(eventId) {
     passwordInput.focus();
   });
 
-  passwordForm.addEventListener("submit", (event) => {
+  passwordForm.addEventListener("submit", async (event) => {
     event.preventDefault();
+    setEditorPassword(passwordInput.value);
 
-    if (passwordInput.value !== EDITOR_PASSWORD) {
+    try {
+      await saveEvents(events);
+    } catch {
       passwordError.textContent = "비밀번호가 일치하지 않습니다.";
       passwordInput.select();
       return;
@@ -193,29 +182,40 @@ function initDetailAdmin(eventId) {
     const files = Array.from(imageInput.files || []);
     if (files.length === 0) return;
 
-    const nextImages = await Promise.all(files.map(fileToDetailImage));
-    const updated = updateEvent((eventData) => {
-      eventData.detailImages = [...(Array.isArray(eventData.detailImages) ? eventData.detailImages : []), ...nextImages];
-    });
+    editorStatus.textContent = "이미지를 업로드하고 있습니다.";
 
-    if (updated) {
-      refreshImageList(updated);
-      editorStatus.textContent = "상세 이미지를 저장했습니다.";
+    try {
+      const nextImages = await Promise.all(files.map(uploadEventImage));
+      const updated = await updateEvent((eventData) => {
+        eventData.detailImages = [...(Array.isArray(eventData.detailImages) ? eventData.detailImages : []), ...nextImages];
+      });
+
+      if (updated) {
+        refreshImageList(updated);
+        editorStatus.textContent = "상세 이미지를 저장했습니다.";
+      }
+    } catch (error) {
+      editorStatus.textContent = error.message || "이미지 업로드에 실패했습니다.";
     }
   });
 
-  imageList.addEventListener("click", (event) => {
+  imageList.addEventListener("click", async (event) => {
     const button = event.target.closest(".event-detail-image-remove");
     if (!button) return;
 
     const imageIndex = Number(button.dataset.imageIndex);
-    const updated = updateEvent((eventData) => {
-      eventData.detailImages = (Array.isArray(eventData.detailImages) ? eventData.detailImages : []).filter((_, index) => index !== imageIndex);
-    });
 
-    if (updated) {
-      refreshImageList(updated);
-      editorStatus.textContent = "상세 이미지를 삭제했습니다.";
+    try {
+      const updated = await updateEvent((eventData) => {
+        eventData.detailImages = (Array.isArray(eventData.detailImages) ? eventData.detailImages : []).filter((_, index) => index !== imageIndex);
+      });
+
+      if (updated) {
+        refreshImageList(updated);
+        editorStatus.textContent = "상세 이미지를 삭제했습니다.";
+      }
+    } catch (error) {
+      editorStatus.textContent = error.message || "삭제 중 오류가 발생했습니다.";
     }
   });
 }
@@ -239,12 +239,17 @@ function renderMissingPage() {
   `;
 }
 
-const eventId = readEventId();
-const eventData = findEvent(loadEvents(), eventId);
+async function initPage() {
+  const eventId = readEventId();
+  const events = await loadEvents();
+  const eventData = findEvent(events, eventId);
 
-if (!eventData) {
-  renderMissingPage();
-} else {
+  if (!eventData) {
+    renderMissingPage();
+    setupMobileNav();
+    return;
+  }
+
   document.querySelector("#app").innerHTML = `
     ${NAV}
     <main id="event-detail-root"></main>
@@ -256,7 +261,8 @@ if (!eventData) {
     ${renderFloatingContactButtons()}
   `;
   renderPage(eventData);
-  initDetailAdmin(eventId);
+  initDetailAdmin(eventId, events);
+  setupMobileNav();
 }
 
-setupMobileNav();
+initPage();
