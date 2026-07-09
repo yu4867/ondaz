@@ -2,6 +2,14 @@ export const STORAGE_KEY = "ondaz-event-content";
 
 let editorPassword = "";
 
+function createEventId() {
+  if (typeof crypto !== "undefined" && crypto.randomUUID) {
+    return crypto.randomUUID();
+  }
+
+  return `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
 export const EMPTY_EVENT = {
   title: "ONDAZ 이벤트",
   body: "등록된 이벤트가 없습니다.",
@@ -22,7 +30,7 @@ export function setEditorPassword(password) {
 
 export function createEvent(overrides = {}) {
   return {
-    id: overrides.id || `event-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    id: overrides.id || createEventId(),
     title: overrides.title || "ONDAZ 이벤트",
     body: overrides.body || "이벤트 내용을 입력해 주세요.",
     image: overrides.image || overrides.image_url || "",
