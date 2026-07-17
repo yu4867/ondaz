@@ -1113,6 +1113,8 @@ p {
   padding-left: clamp(20px, 5vw, 72px);
 }
 .why-slider {
+  --why-slide-gap: 18px;
+  --why-slide-duration: 28s;
   width: 100%;
   overflow: hidden;
 }
@@ -1120,8 +1122,8 @@ p {
 .why-slider__track {
   display: flex;
   width: max-content;
-  gap: 18px;
-  animation: whySlide 28s linear infinite;
+  gap: var(--why-slide-gap);
+  animation: whySlide var(--why-slide-duration) linear infinite;
 }
 
 .why-slider:hover .why-slider__track {
@@ -1150,14 +1152,14 @@ p {
   }
 
   to {
-    transform: translateX(calc(-50% - 9px));
+    transform: translateX(calc(-50% - (var(--why-slide-gap) / 2)));
   }
 }
 
 @media (max-width: 680px) {
-  .why-slider__track {
-    gap: 12px;
-    animation-duration: 24s;
+  .why-slider {
+    --why-slide-gap: 12px;
+    --why-slide-duration: 54s;
   }
 
   .why-slide {

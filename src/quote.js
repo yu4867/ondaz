@@ -120,6 +120,7 @@ document.querySelector("#app").innerHTML = `
   <footer class="footer">
     <strong>ONDAZ</strong>
     <p>오늘의 공간을 카페로, 커피차와 디저트로 행사 현장을 더 특별하게 만드는 ONDAZ입니다.</p>
+    <p>대표자 : 배민준 · 서울시 송파구 방이동 48-5, 33호 · 사업자등록번호 : 185-16-02483</p>
     <p>문의: yu4867@naver.com · 연락처: 0508-9306-5718</p>
   </footer>
 

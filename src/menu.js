@@ -114,8 +114,10 @@ document.querySelector("#app").innerHTML = `
           alt: "ONDAZ 베이커리 메뉴",
           price: [
             { name: "에그타르트", value: "4,000원" },
-            { name: "소금빵", value: "3,500원" },
-            { name: "르뱅쿠키", value: "3,800원" },
+            { name: "소금빵", value: "3,800원" },
+            { name: "르뱅쿠키 (더블초코/말차/화이트 마카다미아)", value: "3,800원" },
+            { name: "르뱅쿠키 (돼지바/누텔라/오레오/로투스/황치츠/티라미수/약과)", value: "4,300원" },
+
             { name: "크로와상", value: "3,800원" },
             { name: "샌드위치", value: "5,000원" },
           ],
@@ -127,6 +129,7 @@ document.querySelector("#app").innerHTML = `
   <footer class="footer">
     <strong>ONDAZ</strong>
     <p>커피차 서비스 · 기업 행사 · 촬영 현장 · 브랜드 프로모션</p>
+    <p>대표자 : 배민준 · 서울시 송파구 방이동 48-5, 33호 · 사업자등록번호 : 185-16-02483</p>
     <p>문의: yu4867@naver.com · 연락처: 0508-9306-5718</p>
   </footer>
 
