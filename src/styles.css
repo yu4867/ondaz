@@ -2357,7 +2357,7 @@ p {
 
 
 .bn-guide-image {
-  max-width: min(1120px, 100%);
+  max-width: min(820px, 100%);
   margin: -16px auto 34px;
   overflow: hidden;
   border-radius: 8px;

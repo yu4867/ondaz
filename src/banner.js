@@ -1,5 +1,5 @@
 import "./styles.css";
-import printGuideImage from "../image/출력물 안내.png";
+import printGuideImage from "../image/banner.png";
 import { setupMobileNav } from "./nav.js";
 import { renderTopMarquee } from "./marquee.js";
 import circleSticker1 from "../image/출력물 안내/원형스티커 (1).png";
@@ -129,7 +129,7 @@ document.querySelector("#app").innerHTML = `
             <li><strong>왼쪽 현수막</strong></li>
             <li>오른쪽 현수막</li>
             <li>32인치 모니터</li>
-            <li>원형스티커</li>
+            <li><strong>원형스티커</strong></li>
           </ul>
         </div>
         <div class="print-tier print-tier--accent">

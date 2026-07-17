@@ -1,6 +1,6 @@
 const marqueeMessages = [
   "오늘의 공간을 카페로, ONDAZ♥",
-  "야외결혼식 · 촬영장 · 기업행사 · 브랜드 프로모션",
+  "기업 · 학교 · 어린이집 행사 · 연예인 서포트 · 야외결혼식 ",
 ];
 
 const marqueeLoop = Array.from({ length: 8 }, () => marqueeMessages).flat();
