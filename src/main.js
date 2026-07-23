@@ -1,5 +1,5 @@
 import "./styles.css";
-import mainImage from "../image/main.jpg";
+import mainImage from "../image/main.png";
 import mainVideo from "../video/main-video.mp4";
 import { setupMobileNav } from "./nav.js";
 import { renderTopMarquee } from "./marquee.js";
