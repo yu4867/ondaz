@@ -1133,6 +1133,7 @@ p {
 .why-slider__track {
   display: flex;
   width: max-content;
+  padding-right: var(--why-slide-gap);
   gap: var(--why-slide-gap);
   animation: whySlide var(--why-slide-duration) linear infinite;
 }
@@ -1165,14 +1166,14 @@ p {
   }
 
   to {
-    transform: translateX(calc(-50% - (var(--why-slide-gap) / 2)));
+    transform: translateX(-50%);
   }
 }
 
 @media (max-width: 680px) {
   .why-slider {
     --why-slide-gap: 12px;
-    --why-slide-duration: 26s;
+    --why-slide-duration: 48s;
   }
 
   .why-slide {
