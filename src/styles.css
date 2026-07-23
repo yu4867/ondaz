@@ -1143,7 +1143,6 @@ p {
   display: flex;
   flex: 0 0 auto;
   gap: var(--why-slide-gap);
-  padding-right: var(--why-slide-gap);
 }
 
 @media (hover: hover) and (pointer: fine) {
