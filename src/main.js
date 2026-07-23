@@ -275,8 +275,8 @@ function setupWhySlider() {
       if (!distance) return;
 
       const isMobile = window.matchMedia("(max-width: 680px)").matches;
-      const pixelsPerSecond = isMobile ? 24 : 42;
-      const minimumDuration = isMobile ? 96 : 70;
+      const pixelsPerSecond = isMobile ? 42 : 52;
+      const minimumDuration = isMobile ? 58 : 56;
       const duration = Math.max(minimumDuration, distance / pixelsPerSecond);
 
       slider.style.setProperty("--why-slide-distance", `${distance}px`);
