@@ -157,10 +157,14 @@ document.querySelector("#app").innerHTML = `
       </div>
       <div class="why-slider">
         <div class="why-slider__track">
-          ${[...whyImages, ...whyImages].map((image, index) => `
-            <figure class="why-slide">
-              <img src="${image}" alt="ONDAZ 현장 이미지 ${(index % whyImages.length) + 1}" decoding="async" />
-            </figure>
+          ${[0, 1].map((groupIndex) => `
+            <div class="why-slider__group"${groupIndex === 1 ? ' aria-hidden="true"' : ""}>
+              ${whyImages.map((image, index) => `
+                <figure class="why-slide">
+                  <img src="${image}" alt="ONDAZ 현장 이미지 ${index + 1}" loading="eager" decoding="async" />
+                </figure>
+              `).join("")}
+            </div>
           `).join("")}
         </div>
       </div>

@@ -1133,9 +1133,16 @@ p {
 .why-slider__track {
   display: flex;
   width: max-content;
-  padding-right: var(--why-slide-gap);
-  gap: var(--why-slide-gap);
   animation: whySlide var(--why-slide-duration) linear infinite;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.why-slider__group {
+  display: flex;
+  flex: 0 0 auto;
+  gap: var(--why-slide-gap);
+  padding-right: var(--why-slide-gap);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1146,6 +1153,7 @@ p {
 
 .why-slide {
   flex: 0 0 clamp(280px, 34vw, 520px);
+  aspect-ratio: 4 / 3;
   margin: 0;
   overflow: hidden;
   border-radius: 8px;
@@ -1155,8 +1163,7 @@ p {
 .why-slide img {
   display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
-  height: auto;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -1166,7 +1173,7 @@ p {
   }
 
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
