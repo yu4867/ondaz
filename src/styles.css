@@ -1137,8 +1137,10 @@ p {
   animation: whySlide var(--why-slide-duration) linear infinite;
 }
 
-.why-slider:hover .why-slider__track {
-  animation-play-state: paused;
+@media (hover: hover) and (pointer: fine) {
+  .why-slider:hover .why-slider__track {
+    animation-play-state: paused;
+  }
 }
 
 .why-slide {
@@ -1170,7 +1172,7 @@ p {
 @media (max-width: 680px) {
   .why-slider {
     --why-slide-gap: 12px;
-    --why-slide-duration: 54s;
+    --why-slide-duration: 26s;
   }
 
   .why-slide {

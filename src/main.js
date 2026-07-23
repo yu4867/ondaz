@@ -15,7 +15,7 @@ import whyImage6 from "../image/6.jpg";
 import whyImage7 from "../image/7.jpg";
 import promiseBeansImage from "../image/Coffee beans.jpg";
 import promiseShotImage from "../image/shot.png";
-import promiseCleanImage from "../image/clean.png";
+import promiseCleanImage from "../image/clean.jpg";
 
 const whyImages = [
   whyImage1_1,
