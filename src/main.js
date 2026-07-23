@@ -249,6 +249,7 @@ document.querySelector("#app").innerHTML = `
 `;
 
 setupMobileNav();
+setupWhySlider();
 setupReviewCarousel();
 
 document.querySelectorAll(".review-card__more").forEach((button) => {
@@ -259,6 +260,48 @@ document.querySelectorAll(".review-card__more").forEach((button) => {
     button.textContent = isExpanded ? "접기" : "더 보기";
   });
 });
+
+function setupWhySlider() {
+  const sliders = document.querySelectorAll(".why-slider");
+  if (!sliders.length) return;
+
+  sliders.forEach((slider) => {
+    const track = slider.querySelector(".why-slider__track");
+    const firstGroup = slider.querySelector(".why-slider__group");
+    if (!track || !firstGroup) return;
+
+    const setDistance = () => {
+      const distance = firstGroup.getBoundingClientRect().width;
+      if (!distance) return;
+
+      const isMobile = window.matchMedia("(max-width: 680px)").matches;
+      const pixelsPerSecond = isMobile ? 24 : 42;
+      const minimumDuration = isMobile ? 96 : 70;
+      const duration = Math.max(minimumDuration, distance / pixelsPerSecond);
+
+      slider.style.setProperty("--why-slide-distance", `${distance}px`);
+      slider.style.setProperty("--why-slide-duration", `${duration}s`);
+      track.style.animation = "none";
+      track.offsetHeight;
+      track.style.animation = "";
+    };
+
+    const scheduleDistanceUpdate = () => requestAnimationFrame(setDistance);
+    firstGroup.querySelectorAll("img").forEach((image) => {
+      if (!image.complete) image.addEventListener("load", scheduleDistanceUpdate, { once: true });
+    });
+
+    if ("ResizeObserver" in window) {
+      const resizeObserver = new ResizeObserver(scheduleDistanceUpdate);
+      resizeObserver.observe(firstGroup);
+      resizeObserver.observe(slider);
+    } else {
+      window.addEventListener("resize", scheduleDistanceUpdate);
+    }
+
+    scheduleDistanceUpdate();
+  });
+}
 
 function setupReviewCarousel() {
   const carousel = document.querySelector("[data-review-carousel]");

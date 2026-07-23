@@ -1126,6 +1126,7 @@ p {
 .why-slider {
   --why-slide-gap: 18px;
   --why-slide-duration: 28s;
+  --why-slide-distance: 0px;
   width: 100%;
   overflow: hidden;
 }
@@ -1169,11 +1170,11 @@ p {
 
 @keyframes whySlide {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 
   to {
-    transform: translate3d(-50%, 0, 0);
+    transform: translate3d(calc(var(--why-slide-distance) * -1), 0, 0);
   }
 }
 
