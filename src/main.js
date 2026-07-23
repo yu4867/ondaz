@@ -1,14 +1,16 @@
 import "./styles.css";
-import mainImage from "../image/main2.png";
+import mainImage from "../image/main.jpg";
+import mainVideo from "../video/main-video.mp4";
 import { setupMobileNav } from "./nav.js";
 import { renderTopMarquee } from "./marquee.js";
+import whyImage1_1 from "../image/1-1.jpg";
+import whyImage1_2 from "../image/1-2.jpg";
 import whyImage1 from "../image/1.jpg";
-import whyImage1Alt from "../image/1-2.png";
-import whyImage2 from "../image/2.png";
+import whyImage2_1 from "../image/2-1.jpg";
+import whyImage2_2 from "../image/2-2.jpg";
+import whyImage2 from "../image/2.jpg";
 import whyImage3 from "../image/3.jpg";
 import whyImage3Alt from "../image/3-1.jpg";
-import whyImage4 from "../image/4.jpg";
-import whyImage5 from "../image/5.png";
 import whyImage6 from "../image/6.jpg";
 import whyImage7 from "../image/7.jpg";
 import promiseBeansImage from "../image/Coffee beans.jpg";
@@ -16,13 +18,14 @@ import promiseShotImage from "../image/shot.png";
 import promiseCleanImage from "../image/clean.png";
 
 const whyImages = [
+  whyImage1_1,
+  whyImage1_2,
   whyImage1,
-  whyImage1Alt,
+  whyImage2_1,
+  whyImage2_2,
   whyImage2,
   whyImage3,
   whyImage3Alt,
-  whyImage4,
-  whyImage5,
   whyImage6,
   whyImage7,
 ];
@@ -127,7 +130,11 @@ document.querySelector("#app").innerHTML = `
 
   <main id="top">
     <section class="hero">
-      <div class="hero__media image-placeholder image-placeholder--photo" style="background-image: url('${mainImage}')"></div>
+      <div class="hero__media image-placeholder image-placeholder--photo" aria-label="ONDAZ 메인 이미지">
+        <video class="hero__media-video" autoplay muted loop playsinline preload="metadata" poster="${mainImage}">
+          <source src="${mainVideo}" type="video/mp4" />
+        </video>
+      </div>
       <div class="hero__content">
         <p class="eyebrow">Coffee Truck Catering Service</p>
         <h1>오늘의 공간을 카페로,<br /><span class="hero__brand">ONDAZ</span></h1>
