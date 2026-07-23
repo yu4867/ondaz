@@ -1,5 +1,5 @@
 import "./styles.css";
-import mainImage from "../image/main.png";
+import mainImage from "../image/main.jpg";
 import mainVideo from "../video/main-video.mp4";
 import { setupMobileNav } from "./nav.js";
 import { renderTopMarquee } from "./marquee.js";
@@ -159,7 +159,7 @@ document.querySelector("#app").innerHTML = `
         <div class="why-slider__track">
           ${[...whyImages, ...whyImages].map((image, index) => `
             <figure class="why-slide">
-              <img src="${image}" alt="ONDAZ 현장 이미지 ${(index % whyImages.length) + 1}" loading="lazy" />
+              <img src="${image}" alt="ONDAZ 현장 이미지 ${(index % whyImages.length) + 1}" decoding="async" />
             </figure>
           `).join("")}
         </div>
