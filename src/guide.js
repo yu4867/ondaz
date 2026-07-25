@@ -173,7 +173,7 @@ document.querySelector("#app").innerHTML = `
               </div>
               <div>
                 <span>음료</span>
-                <span>주문 금액 30만원 이상</span>
+                <span>100잔 이상</span>
               </div>
               <div>
                 <span>디저트</span>
@@ -199,7 +199,7 @@ document.querySelector("#app").innerHTML = `
               <strong>음료 비용 + (디저트 비용) + 출장비 + 출력비 = 총 금액 (VAT 별도)</strong>
             </div>
             <ul>
-              <li>최소 주문 기준 : 음료 주문 금액 30만원 이상, 디저트 50개 이상</li>
+              <li>최소 주문 기준 : 음료 100잔 이상, 디저트 50개 이상</li>
               <li>기본 출장비 : 70,000원 (거리/지역에 따라 추가 발생)</li>
               <li>출력비 : 음료비용 + (디저트비용)에 따라 서비스 제공 <a class="guide-inline-link" href="/banner.html">배너 안내</a> 참고</li>
               <li>전기 사용 불가 시 : 발전기 대여료 50,000원 추가 발생 (2시간 기준)</li>

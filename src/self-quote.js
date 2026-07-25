@@ -15,7 +15,7 @@ const DESSERTS = [
   { id: "cinnamon-churros", label: "시나몬 츄러스", price: 3500, unit: "개" },
   { id: "choco-caramel-churros", label: "초코/카라멜 츄러스", price: 4000, unit: "개" },
   { id: "egg-tart", label: "에그타르트", price: 4000, unit: "개" },
-  { id: "salt-bread", label: "소금빵", price: 3500, unit: "개" },
+  { id: "salt-bread", label: "소금빵", price: 3800, unit: "개" },
   { id: "levain-cookie", label: "르뱅쿠키", price: 3800, unit: "개" },
   { id: "croissant", label: "크로와상", price: 3800, unit: "개" },
   { id: "sandwich", label: "샌드위치", price: 5000, unit: "개" },
@@ -31,8 +31,7 @@ const REGIONS = [
 ];
 
 const FEE = { extraHour: 30000, generator: 50000, designer: 30000 };
-const MIN_QTY = 50;
-const MIN_DRINK_ORDER = 300000;
+const MIN_DRINK_QTY = 100;
 const MIN_DESSERT_QTY = 50;
 
 const state = {
@@ -83,7 +82,7 @@ document.querySelector("#app").innerHTML = `
 
           <div class="sq-card">
             <p class="sq-card__title">음료 선택 *</p>
-            <p class="sq-card__note">음료는 금액으로 30만 원 이상 주문 필요합니다.</p>
+            <p class="sq-card__note">음료는 최소 100잔 이상 주문 필요합니다.</p>
             <div class="sq-drink-group">
               ${DRINKS.map(d => `
                 <label class="sq-drink-card">
@@ -98,7 +97,7 @@ document.querySelector("#app").innerHTML = `
               <div class="sq-qty-row">
                 <div class="sq-qty-wrap">
                   <button class="sq-qty-btn" data-target="drinkQty" data-dir="-1">−</button>
-                  <input id="drinkQty" class="sq-qty-input" type="number" value="${state.drinkQty}" min="${MIN_QTY}" />
+                  <input id="drinkQty" class="sq-qty-input" type="number" value="${state.drinkQty}" min="${MIN_DRINK_QTY}" />
                   <button class="sq-qty-btn" data-target="drinkQty" data-dir="1">+</button>
                 </div>
               </div>
@@ -122,7 +121,7 @@ document.querySelector("#app").innerHTML = `
               <div class="sq-qty-row">
                 <div class="sq-qty-wrap">
                   <button class="sq-qty-btn" data-target="dessertQty" data-dir="-1">−</button>
-                  <input id="dessertQty" class="sq-qty-input" type="number" value="${state.dessertQty}" min="${MIN_QTY}" />
+                  <input id="dessertQty" class="sq-qty-input" type="number" value="${state.dessertQty}" min="${MIN_DESSERT_QTY}" />
                   <button class="sq-qty-btn" data-target="dessertQty" data-dir="1">+</button>
                 </div>
               </div>
@@ -232,7 +231,7 @@ function renderResult() {
   const vat = Math.round(subtotal * 0.1);
   const total = subtotal + vat;
   const warnings = [
-    drinkCost < MIN_DRINK_ORDER && `음료 주문 금액이 ${fmt(MIN_DRINK_ORDER)} 미만입니다.`,
+    state.drinkQty < MIN_DRINK_QTY && `음료는 최소 ${MIN_DRINK_QTY}잔 이상 주문해야 합니다.`,
     dessert.id !== "none" && state.dessertQty < MIN_DESSERT_QTY && `디저트는 한 종류당 ${MIN_DESSERT_QTY}개 이상 주문해야 합니다.`,
   ].filter(Boolean);
 
@@ -289,7 +288,7 @@ document.querySelectorAll("input[name='drinkId']").forEach(el => {
 });
 
 document.getElementById("drinkQty").addEventListener("input", e => {
-  state.drinkQty = Math.max(MIN_QTY, parseInt(e.target.value) || MIN_QTY);
+  state.drinkQty = Math.max(MIN_DRINK_QTY, parseInt(e.target.value) || MIN_DRINK_QTY);
   e.target.value = state.drinkQty;
   renderResult();
 });
@@ -303,7 +302,7 @@ document.querySelectorAll("input[name='dessertId']").forEach(el => {
 });
 
 document.getElementById("dessertQty").addEventListener("input", e => {
-  state.dessertQty = Math.max(MIN_QTY, parseInt(e.target.value) || MIN_QTY);
+  state.dessertQty = Math.max(MIN_DESSERT_QTY, parseInt(e.target.value) || MIN_DESSERT_QTY);
   e.target.value = state.dessertQty;
   renderResult();
 });
@@ -334,10 +333,10 @@ document.querySelectorAll(".sq-qty-btn").forEach(btn => {
     const dir = parseInt(btn.dataset.dir);
 
     if (target === "drinkQty") {
-      state.drinkQty = Math.max(MIN_QTY, state.drinkQty + dir * 10);
+      state.drinkQty = Math.max(MIN_DRINK_QTY, state.drinkQty + dir * 10);
       document.getElementById("drinkQty").value = state.drinkQty;
     } else if (target === "dessertQty") {
-      state.dessertQty = Math.max(MIN_QTY, state.dessertQty + dir * 10);
+      state.dessertQty = Math.max(MIN_DESSERT_QTY, state.dessertQty + dir * 10);
       document.getElementById("dessertQty").value = state.dessertQty;
     } else if (target === "extraHours") {
       state.extraHours = Math.max(0, Math.min(4, state.extraHours + dir));
