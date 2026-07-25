@@ -70,21 +70,21 @@ document.querySelector("#app").innerHTML = `
           subtitle: "Basic",
           image: basicMenuImage,
           alt: "ONDAZ 베이직 음료 메뉴",
-          price: "잔당 3,000원",
+          price: "잔당 3,500원",
         })}
         ${renderMenuImage({
           title: "스탠다드 세트",
           subtitle: "Standard",
           image: standardMenuImage,
           alt: "ONDAZ 스탠다드 음료 메뉴",
-          price: "잔당 3,500원",
+          price: "잔당 4,000원",
         })}
         ${renderMenuImage({
           title: "전메뉴",
           subtitle: "All Menu",
           image: allMenuImage,
           alt: "ONDAZ 전메뉴",
-          price: "잔당 4,000원",
+          price: "잔당 4,500원",
         })}
       </div>
     </section>

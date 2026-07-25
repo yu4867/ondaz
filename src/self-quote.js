@@ -3,9 +3,9 @@ import { setupMobileNav } from "./nav.js";
 import { renderTopMarquee } from "./marquee.js";
 
 const DRINKS = [
-  { id: "basic", label: "베이직 세트", price: 3000, unit: "잔" },
-  { id: "standard", label: "스탠다드 세트", price: 3500, unit: "잔" },
-  { id: "all", label: "전메뉴", price: 4000, unit: "잔" },
+  { id: "basic", label: "베이직 세트", price: 3500, unit: "잔" },
+  { id: "standard", label: "스탠다드 세트", price: 4000, unit: "잔" },
+  { id: "all", label: "전메뉴", price: 4500, unit: "잔" },
 ];
 
 const DESSERTS = [
