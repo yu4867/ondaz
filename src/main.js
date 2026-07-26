@@ -33,7 +33,7 @@ const promiseItems = [
   {
     image: promiseBeansImage,
     title: "고품질 원두 사용",
-    description: "저렴한 원두가 아닌, 향과 밸런스가 좋은 고품질 원두를 사용해 행사 현장에서도 완성도 있는 커피를 제공합니다.",
+    description: "저렴한 원두가 아닌, 브라질 생두 등급 중 최상위 등급인 NY2 원두와 인도 원두를 블렌딩한 고품질 원두를 사용합니다.",
   },
   {
     image: promiseShotImage,
