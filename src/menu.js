@@ -1,11 +1,10 @@
 import "./styles.css";
 import { setupMobileNav } from "./nav.js";
 import { renderTopMarquee } from "./marquee.js";
-import basicMenuImage from "../image/menu/basic.png";
-import standardMenuImage from "../image/menu/standard.png";
-import allMenuImage from "../image/menu/all.png";
-import snackMenuImage from "../image/menu/스낵.png";
-import bakeryMenuImage from "../image/menu/베이커리.png";
+import basicMenuImage from "../image/메뉴판/베이직.png";
+import standardMenuImage from "../image/메뉴판/스탠다드.png";
+import premiumMenuImage from "../image/메뉴판/프리미엄.png";
+import allMenuImage from "../image/메뉴판/전메뉴.png";
 
 const renderMenuPrice = (price) => {
   if (!price) return "";
@@ -80,47 +79,18 @@ document.querySelector("#app").innerHTML = `
           price: "잔당 4,000원",
         })}
         ${renderMenuImage({
+          title: "프리미엄 세트",
+          subtitle: "Premium",
+          image: premiumMenuImage,
+          alt: "ONDAZ 프리미엄 음료 메뉴",
+          price: "잔당 4,500원",
+        })}
+        ${renderMenuImage({
           title: "전메뉴",
           subtitle: "All Menu",
           image: allMenuImage,
           alt: "ONDAZ 전메뉴",
           price: "잔당 4,500원",
-        })}
-      </div>
-    </section>
-
-    <section class="section menu-page-section menu-page-section--dessert">
-      <div class="section-heading">
-        <p class="eyebrow">Dessert Menu</p>
-        <h2>디저트 메뉴</h2>
-      </div>
-      <div class="menu-image-grid menu-image-grid--dessert">
-        ${renderMenuImage({
-          title: "스낵",
-          subtitle: "Snack",
-          image: snackMenuImage,
-          alt: "ONDAZ 스낵 메뉴",
-          price: [
-            { name: "꽈배기", value: "2,500원" },
-            { name: "핫도그", value: "3,000원" },
-            { name: "시나몬 츄러스", value: "3,500원" },
-            { name: "초코/카라멜 츄러스", value: "4,000원" },
-          ],
-        })}
-        ${renderMenuImage({
-          title: "베이커리",
-          subtitle: "Bakery",
-          image: bakeryMenuImage,
-          alt: "ONDAZ 베이커리 메뉴",
-          price: [
-            { name: "에그타르트", value: "4,000원" },
-            { name: "소금빵", value: "3,800원" },
-            { name: "르뱅쿠키 (더블초코/말차/화이트 마카다미아)", value: "3,800원" },
-            { name: "르뱅쿠키 (돼지바/누텔라/오레오/로투스/황치츠/티라미수/약과)", value: "4,300원" },
-
-            { name: "크로와상", value: "3,800원" },
-            { name: "샌드위치", value: "5,000원" },
-          ],
         })}
       </div>
     </section>

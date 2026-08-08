@@ -1,28 +1,28 @@
 import "./styles.css";
-import printGuideImage from "../image/banner.png";
+import printGuideImage from "../image/출력물 안내/종합 안내/banner.png";
 import { setupMobileNav } from "./nav.js";
 import { renderTopMarquee } from "./marquee.js";
-import circleSticker1 from "../image/출력물 안내/원형스티커 (1).png";
-import circleSticker2 from "../image/출력물 안내/원형스티커 (2).png";
-import circleSticker3 from "../image/출력물 안내/원형스티커 (3).png";
-import circleSticker4 from "../image/출력물 안내/원형스티커 (4).png";
-import circleSticker5 from "../image/출력물 안내/원형스티커 (5).png";
-import horizontalBanner1 from "../image/출력물 안내/가로현수막 (1).png";
-import horizontalBanner2 from "../image/출력물 안내/가로현수막 (2).png";
-import horizontalBanner3 from "../image/출력물 안내/가로현수막 (3).png";
-import horizontalBanner4 from "../image/출력물 안내/가로현수막 (4).png";
-import horizontalBanner5 from "../image/출력물 안내/가로현수막 (5).png";
-import banner1 from "../image/출력물 안내/현수막(1).png";
-import banner2 from "../image/출력물 안내/현수막(2).png";
-import banner3 from "../image/출력물 안내/현수막(3).png";
-import banner4 from "../image/출력물 안내/현수막(4).png";
-import banner5 from "../image/출력물 안내/현수막(5).png";
-import banner6 from "../image/출력물 안내/현수막(6).png";
-import xBanner1 from "../image/출력물 안내/x배너 (1).png";
-import xBanner2 from "../image/출력물 안내/x배너 (2).png";
-import xBanner3 from "../image/출력물 안내/x배너 (3).png";
-import xBanner4 from "../image/출력물 안내/x배너 (4).png";
-import xBanner5 from "../image/출력물 안내/x배너 (5).png";
+import circleSticker1 from "../image/출력물 안내/원형 스티커/원형스티커 (1).png";
+import circleSticker2 from "../image/출력물 안내/원형 스티커/원형스티커 (2).png";
+import circleSticker3 from "../image/출력물 안내/원형 스티커/원형스티커 (3).png";
+import circleSticker4 from "../image/출력물 안내/원형 스티커/원형스티커 (4).png";
+import circleSticker5 from "../image/출력물 안내/원형 스티커/원형스티커 (5).png";
+import horizontalBanner1 from "../image/출력물 안내/가로 현수막/가로현수막 (1).png";
+import horizontalBanner2 from "../image/출력물 안내/가로 현수막/가로현수막 (2).png";
+import horizontalBanner3 from "../image/출력물 안내/가로 현수막/가로현수막 (3).png";
+import horizontalBanner4 from "../image/출력물 안내/가로 현수막/가로현수막 (4).png";
+import horizontalBanner5 from "../image/출력물 안내/가로 현수막/가로현수막 (5).png";
+import banner1 from "../image/출력물 안내/현수막/현수막(1).png";
+import banner2 from "../image/출력물 안내/현수막/현수막(2).png";
+import banner3 from "../image/출력물 안내/현수막/현수막(3).png";
+import banner4 from "../image/출력물 안내/현수막/현수막(4).png";
+import banner5 from "../image/출력물 안내/현수막/현수막(5).png";
+import banner6 from "../image/출력물 안내/현수막/현수막(6).png";
+import xBanner1 from "../image/출력물 안내/X배너/x배너 (1).png";
+import xBanner2 from "../image/출력물 안내/X배너/x배너 (2).png";
+import xBanner3 from "../image/출력물 안내/X배너/x배너 (3).png";
+import xBanner4 from "../image/출력물 안내/X배너/x배너 (4).png";
+import xBanner5 from "../image/출력물 안내/X배너/x배너 (5).png";
 
 const circleStickerSamples = [circleSticker1, circleSticker2, circleSticker3, circleSticker4, circleSticker5];
 const horizontalBannerSamples = [horizontalBanner1, horizontalBanner2, horizontalBanner3, horizontalBanner4, horizontalBanner5];
@@ -82,8 +82,8 @@ document.querySelector("#app").innerHTML = `
         <div class="bn-guide-card bn-guide-card--wide">
           <span class="bn-guide-card__label">홍보물 전달 기한</span>
           <div class="bn-guide-card__rows">
-            <span>원형스티커: <strong>행사 7일 전까지</strong></span>
-            <span>그 외 출력물: <strong>행사 5일 전까지</strong></span>
+            <span>원형스티커: <strong>행사 5일 전까지</strong></span>
+            <span>그 외 출력물: <strong>행사 3일 전까지</strong></span>
           </div>
         </div>
         <div class="bn-guide-card bn-guide-card--fee bn-guide-card--mail">
@@ -97,14 +97,9 @@ document.querySelector("#app").innerHTML = `
           <span>고해상도 영상은</br>현장 장비에서 재생이 어려울 수 있습니다.</span>
         </div>
         <div class="bn-guide-card bn-guide-card--fee">
-          <span class="bn-guide-card__label">긴급 출력 비용</span>
-          <strong>장당 20,000원</strong>
-          <span>전달 기한을 넘기는 경우</br>비용이 발생할 수 있습니다.</span>
-        </div>
-        <div class="bn-guide-card bn-guide-card--fee">
           <span class="bn-guide-card__label">디자이너 연결 비용</span>
-          <strong>장당 30,000원</strong>
-          <span>디자인 작업이 어려우신 경우</br>추가 가능합니다.</span>
+          <strong>30,000원</strong>
+          <span>출력물 장수와 관계없이</br>디자인 1건 기준입니다.</span>
         </div>
       </div>
     </section>
@@ -119,15 +114,14 @@ document.querySelector("#app").innerHTML = `
         <div class="print-tier">
           <p class="print-tier__amount">60만 원 이상</p>
           <ul class="print-tier__list">
-            <li>오른쪽 현수막</li>
+            <li>날개 현수막 1장</li>
             <li>32인치 모니터</li>
           </ul>
         </div>
         <div class="print-tier">
           <p class="print-tier__amount">80만원 이상</p>
           <ul class="print-tier__list">
-            <li><strong>왼쪽 현수막</strong></li>
-            <li>오른쪽 현수막</li>
+            <li><strong>날개 현수막 2장</strong></li>
             <li>32인치 모니터</li>
             <li><strong>원형스티커</strong></li>
           </ul>
@@ -135,10 +129,9 @@ document.querySelector("#app").innerHTML = `
         <div class="print-tier print-tier--accent">
           <p class="print-tier__amount">100만원 이상</p>
           <ul class="print-tier__list">
-            <li><strong>왼쪽 현수막</strong></li>
-            <li>오른쪽 현수막</li>
+            <li><strong>날개 현수막 2장</strong></li>
             <li>32인치 모니터</li>
-            <li><strong>X배너</strong></li>
+            <li><strong>X배너 or 가로현수막 (택1)</strong></li>
             <li><strong>원형 스티커</strong></li>
           </ul>
         </div>

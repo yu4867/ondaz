@@ -72,25 +72,10 @@ document.querySelector("#app").innerHTML = `
 
         <details class="accordion-card">
           <summary>
-            <span class="accordion-icon icon-people" aria-hidden="true"></span>
-            <span class="accordion-title">
-              <strong>현장 인원 및 수량 체크</strong>
-              <small>담당자 확인 후 문의 양식 작성</small>
-            </span>
-            <span class="accordion-toggle">⌄</span>
-          </summary>
-          <div class="accordion-content">
-            <p>현장담당자님께 현장인원 및 수량 문의해주세요.</p>
-            <p>전달 받으신 내용대로 문의 양식표 작성해 전달해주세요.</p>
-          </div>
-        </details>
-
-        <details class="accordion-card">
-          <summary>
             <span class="accordion-icon icon-payment" aria-hidden="true"></span>
             <span class="accordion-title">
               <strong>예약금 및 환불안내</strong>
-              <small>예약금 기준 및 취소 정책</small>
+              <small>예약금 선지급 시 날짜가 확정됩니다.</small>
             </span>
             <span class="accordion-toggle">⌄</span>
           </summary>
@@ -102,23 +87,12 @@ document.querySelector("#app").innerHTML = `
             </ul>
             <h3>예약금 환불 안내</h3>
             <ul>
-              <li>5일 전 취소 : 예약금 100% 환불</li>
-              <li>3일 전 취소 : 예약금 50% 환불</li>
-              <li>1일 전 및 당일 취소 : 예약금 환불 불가</li>
+              <li>예약금은 환불이 불가합니다.</li>
             </ul>
-            <p>디저트 금액은 예약금 환불 불가 항목입니다.</p>
+            <p>* 서포트 날짜 하루 전까지 잔금 완납해 주시면 예약이 완료됩니다.</p>
           </div>
         </details>
-      </div>
-    </section>
 
-    <section class="section accordion-section accordion-section--alt">
-      <div class="section-heading">
-        <p class="eyebrow">Use Guide</p>
-        <h2>커피차 이용안내</h2>
-      </div>
-
-      <div class="accordion-list">
         <details class="accordion-card">
           <summary>
             <span class="accordion-icon icon-time" aria-hidden="true"></span>
@@ -132,7 +106,7 @@ document.querySelector("#app").innerHTML = `
             <ul>
               <li>기본 운영시간 : 2시간</li>
               <li>추가 이용 : 시간당 30,000원 별도 발생</li>
-              <li>준비 시간 : 원활한 운영을 위해 행사 약 1-2시간 전 도착 (교통상황에 따라 달라질 수 있습니다.)</li>
+              <li>준비 시간 : 원활한 운영을 위해 행사 약 1시간 전 도착</li>
             </ul>
           </div>
         </details>
@@ -150,7 +124,6 @@ document.querySelector("#app").innerHTML = `
             <ul>
               <li>예약 시기 : 서포트 날짜 기준 최소 5일 전</li>
               <li>예약 방법 : 카카오 채널톡 또는 유선을 통해 문의 주시면 됩니다.</li>
-              <li>긴급 서포트 : 반드시 전화 문의 부탁드립니다.</li>
               <li>문의 방법 : 페이지 상단 '견적 문의'를 이용해주세요.</li>
             </ul>
           </div>
@@ -160,8 +133,8 @@ document.querySelector("#app").innerHTML = `
           <summary>
             <span class="accordion-icon icon-quantity" aria-hidden="true"></span>
             <span class="accordion-title">
-              <strong>최소 주문수량 기준</strong>
-              <small>메뉴별 최소 수량 안내</small>
+              <strong>최소 주문금액 기준</strong>
+              <small>주문 구성별 최소 금액 안내</small>
             </span>
             <span class="accordion-toggle">⌄</span>
           </summary>
@@ -172,12 +145,12 @@ document.querySelector("#app").innerHTML = `
                 <strong>최소 주문 기준</strong>
               </div>
               <div>
-                <span>음료</span>
-                <span>100잔 이상</span>
+                <span>음료만 주문</span>
+                <span>음료 금액 50만 원 이상</span>
               </div>
               <div>
-                <span>디저트</span>
-                <span>50개 이상</span>
+                <span>음료 + 디저트 주문</span>
+                <span>합산 50만 원 이상</span>
               </div>
             </div>
             <p>자세한 설명은 메뉴안내를 참고해주세요.</p>
@@ -187,21 +160,64 @@ document.querySelector("#app").innerHTML = `
 
         <details class="accordion-card">
           <summary>
+            <span class="accordion-icon icon-location" aria-hidden="true"></span>
+            <span class="accordion-title">
+              <strong>지역별 출장비 안내</strong>
+              <small>지역에 따라 출장비가 다르게 책정됩니다.</small>
+            </span>
+            <span class="accordion-toggle">⌄</span>
+          </summary>
+          <div class="accordion-content">
+            <p>출장비는 지역에 따라 다르게 책정됩니다.</p>
+            <div class="quantity-table">
+              <div class="quantity-table__head">
+                <strong>지역</strong>
+                <strong>출장비</strong>
+              </div>
+              <div>
+                <span>서울, 경기남부권</span>
+                <span>70,000 ~ 100,000원</span>
+              </div>
+              <div>
+                <span>경기북부, 외곽</span>
+                <span>120,000 ~ 150,000원</span>
+              </div>
+              <div>
+                <span>천안, 아산</span>
+                <span>130,000원</span>
+              </div>
+              <div>
+                <span>충청권</span>
+                <span>150,000원</span>
+              </div>
+              <div>
+                <span>전라, 강원, 경상</span>
+                <span>150,000 ~ 300,000원</span>
+              </div>
+              <div>
+                <span>제주 및 섬지역권</span>
+                <span>1,000,000원 ~</span>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="accordion-card">
+          <summary>
             <span class="accordion-icon icon-cost" aria-hidden="true"></span>
             <span class="accordion-title">
               <strong>총 금액 산정 기준</strong>
-              <small>음료, 디저트, 출장비, 출력비</small>
+              <small>음료, 디저트, 출장비, 홍보물</small>
             </span>
             <span class="accordion-toggle">⌄</span>
           </summary>
           <div class="accordion-content">
             <div class="cost-box">
-              <strong>음료 비용 + (디저트 비용) + 출장비 + 출력비 = 총 금액 (VAT 별도)</strong>
+              <strong>음료(디저트) + 출장비 + 홍보물 = 총 금액</strong>
             </div>
             <ul>
-              <li>최소 주문 기준 : 음료 100잔 이상, 디저트 50개 이상</li>
               <li>기본 출장비 : 70,000원 (거리/지역에 따라 추가 발생)</li>
-              <li>출력비 : 음료비용 + (디저트비용)에 따라 서비스 제공 <a class="guide-inline-link" href="/banner.html">배너 안내</a> 참고</li>
+              <li>출력비 : 주문금액에 따라 서비스 제공 <a class="guide-inline-link" href="/banner.html">배너 안내</a> 참고</li>
               <li>전기 사용 불가 시 : 발전기 대여료 50,000원 추가 발생 (2시간 기준)</li>
             </ul>
           </div>

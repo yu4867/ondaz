@@ -1,21 +1,21 @@
 import "./styles.css";
-import mainImage from "../image/main.jpg";
+import mainImage from "../image/행사 사진/main.jpg";
 import mainVideo from "../video/main-video.mp4";
 import { setupMobileNav } from "./nav.js";
 import { renderTopMarquee } from "./marquee.js";
-import whyImage1_1 from "../image/1-1.jpg";
-import whyImage1_2 from "../image/1-2.jpg";
-import whyImage1 from "../image/1.jpg";
-import whyImage2_1 from "../image/2-1.jpg";
-import whyImage2_2 from "../image/2-2.jpg";
-import whyImage2 from "../image/2.jpg";
-import whyImage3 from "../image/3.jpg";
-import whyImage3Alt from "../image/3-1.jpg";
-import whyImage6 from "../image/6.jpg";
-import whyImage7 from "../image/7.jpg";
-import promiseBeansImage from "../image/Coffee beans.jpg";
-import promiseShotImage from "../image/shot.png";
-import promiseCleanImage from "../image/clean.jpg";
+import whyImage1_1 from "../image/행사 사진/1-1.jpg";
+import whyImage1_2 from "../image/행사 사진/1-2.jpg";
+import whyImage1 from "../image/행사 사진/1.jpg";
+import whyImage2_1 from "../image/행사 사진/2-1.jpg";
+import whyImage2_2 from "../image/행사 사진/2-2.jpg";
+import whyImage2 from "../image/행사 사진/2.jpg";
+import whyImage3 from "../image/행사 사진/3.jpg";
+import whyImage3Alt from "../image/행사 사진/3-1.jpg";
+import whyImage6 from "../image/행사 사진/6.jpg";
+import whyImage7 from "../image/행사 사진/7.jpg";
+import promiseBeansImage from "../image/배경 및 소재/Coffee beans.jpg";
+import promiseShotImage from "../image/대표 이미지/shot.png";
+import promiseCleanImage from "../image/배경 및 소재/clean.jpg";
 
 const whyImages = [
   whyImage1_1,
