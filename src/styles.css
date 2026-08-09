@@ -1856,7 +1856,7 @@ p {
 
 .phone-fab {
   position: fixed;
-  bottom: 96px;
+  bottom: 164px;
   right: 28px;
   z-index: 200;
   display: flex;
@@ -1897,7 +1897,7 @@ p {
 
 .kakao-fab {
   position: fixed;
-  bottom: 28px;
+  bottom: 96px;
   right: 28px;
   z-index: 200;
   display: flex;
@@ -1934,6 +1934,47 @@ p {
 }
 
 .kakao-fab:hover .kakao-fab__label {
+  opacity: 1;
+}
+
+.instagram-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #833ab4, #fd1d1d 55%, #fcb045);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  transition: width 0.25s ease, box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.instagram-fab:hover {
+  width: 140px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
+}
+
+.instagram-fab svg {
+  flex-shrink: 0;
+  margin-left: 15px;
+}
+
+.instagram-fab__label {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  opacity: 0;
+  transition: opacity 0.15s 0.1s;
+  padding-right: 16px;
+}
+
+.instagram-fab:hover .instagram-fab__label {
   opacity: 1;
 }
 

@@ -246,6 +246,13 @@ document.querySelector("#app").innerHTML = `
     </svg>
     <span class="kakao-fab__label">카카오톡 문의</span>
   </a>
+
+  <a href="https://www.instagram.com/ondaz_coffeetruck/" class="instagram-fab" target="_blank" rel="noopener noreferrer" aria-label="온다즈 인스타그램 바로가기">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+      <path fill="#ffffff" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm10.5 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+    </svg>
+    <span class="instagram-fab__label">인스타그램</span>
+  </a>
 `;
 
 setupMobileNav();
